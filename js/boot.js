@@ -70,8 +70,6 @@ bootState.updateBootText = () => {
 }
 
 bootState.startState = () => {
-    //Initial GameSystem (Arcade, P2, Ninja)
-    game.physics.startSystem(Phaser.Physics.ARCADE);
 
     //Initial Load State
     game.state.start('load');
@@ -85,11 +83,13 @@ bootState.create = () => {
     // animate "booting..." string
     let waitTime = 3;   // how much wait time in seconds
     let repeatNum = waitTime;
-    game.time.events.repeat(Phaser.Timer.SECOND, repeatNum, bootState.updateBootText, this);
+    game.time.events.repeat(Phaser.Timer.SECOND/waitTime, repeatNum, bootState.updateBootText, this);
 
     // retrieve device info and store into userData map (might be located in stateManager.js)
     bootState.setUserData();
 
     // run load state after boot string sequence
-    game.time.events.repeat(Phaser.Timer.SECOND*(waitTime + 1), 1, bootState.startState, this);
+    //game.time.events.repeat(Phaser.Timer.SECOND*waitTime, 1, bootState.startState, this);
+
+    bootState.startState();
 }
