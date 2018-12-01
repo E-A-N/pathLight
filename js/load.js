@@ -14,11 +14,11 @@ loadState = {
         loadState.textSprite;      // sprite image placeholder
         loadState.screenSprite;    // sprite image placeholder
         loadState.textImgLabel = data.textImgLabel || config.loader.loadText.spriteLabel;
-        loadState.textImgSrc = data.textImgSrc || config.loader.loadText.spriteSrc;
+        loadState.textImgSrc = data.textImgSrc || config.loader.loadText.src;
         loadState.textImgX = data.textImgX || config.loader.loadText.xPosition;
         loadState.textImgY = data.textImgY || config.loader.loadText.yPosition;
         loadState.screenImgLabel = data.screenImgLabel || config.loader.loadScreen.spriteLabel;
-        loadState.screenImgSrc = data.screenImgSrc || config.loader.loadScreen.spriteSrc;
+        loadState.screenImgSrc = data.screenImgSrc || config.loader.loadScreen.src;
         loadState.screenImgX = data.screenImgX || config.loader.loadScreen.xPosition;
         loadState.screenImgY = data.screenImgY || config.loader.loadScreen.yPosition;
 
@@ -129,19 +129,37 @@ loadState = {
         game.load.audio(loadState.bgmLabel, [loadState.mp3, loadState.ogg]);
 
         // Menu loads
-        game.load.image(config.menuState.background.imageKey, config.menuState.background.spriteSrc);
-        game.load.image(config.menuState.title.imageKey, config.menuState.title.spriteSrc);
-        game.load.image(config.menuState.startButton.imageKey, config.menuState.startButton.spriteSrc);
-        game.load.image(config.menuState.startButtonDots.imageKey, config.menuState.startButtonDots.spriteSrc);
+        game.load.image(config.menuState.background.key, config.menuState.background.src);
+        game.load.image(config.menuState.background2.key, config.menuState.background2.src);
+        game.load.image(config.menuState.title.key, config.menuState.title.src);
+        game.load.image(config.menuState.startButton.key, config.menuState.startButton.src);
+        game.load.image(config.menuState.startButtonDots.key, config.menuState.startButtonDots.src);
 
         // Game loop loads
         game.load.image(config.loader.playerImage.key, config.loader.playerImage.src);
         game.load.image(config.loader.mapImage.key,    config.loader.mapImage.src);
         game.load.image(config.loader.placeHolder.key, config.loader.placeHolder.src);
+        game.load.image(config.default.blocks.quarter.key, config.default.blocks.quarter.src);
+        game.load.image(config.default.colorPickup.key, config.default.colorPickup.src);
         game.load.image(config.default.neutralMap.key, config.default.neutralMap.src);
+        game.load.image(config.default.darkness.key, config.default.darkness.src);
+        game.load.image(config.default.particles.key, config.default.particles.src);
 
         // Game over loads
-        game.load.image(config.gameOverState.restartButton.imageKey, config.gameOverState.restartButton.spriteSrc);
+        game.load.image(config.gameOverState.restartButton.key, config.gameOverState.restartButton.src);
+
+        // score texts
+        game.load.image(config.default.score.sprites.scoreText.key, config.default.score.sprites.scoreText.src);
+        game.load.image(config.default.score.sprites.textNum0.key, config.default.score.sprites.textNum0.src);
+        game.load.image(config.default.score.sprites.textNum1.key, config.default.score.sprites.textNum1.src);
+        game.load.image(config.default.score.sprites.textNum2.key, config.default.score.sprites.textNum2.src);
+        game.load.image(config.default.score.sprites.textNum3.key, config.default.score.sprites.textNum3.src);
+        game.load.image(config.default.score.sprites.textNum4.key, config.default.score.sprites.textNum4.src);
+        game.load.image(config.default.score.sprites.textNum5.key, config.default.score.sprites.textNum5.src);
+        game.load.image(config.default.score.sprites.textNum6.key, config.default.score.sprites.textNum6.src);
+        game.load.image(config.default.score.sprites.textNum7.key, config.default.score.sprites.textNum7.src);
+        game.load.image(config.default.score.sprites.textNum8.key, config.default.score.sprites.textNum8.src);
+        game.load.image(config.default.score.sprites.textNum9.key, config.default.score.sprites.textNum9.src);
     },
 
     /**
@@ -152,6 +170,9 @@ loadState = {
     create: () => {
         // setup screen image
         game.stage.backgroundColor = loadState.background;
+
+        loadState.changeState();    // skip all this fake loading screen stuff lol
+
         //loadState.getMapSpeed();
         loadState.createScreenImg();
 

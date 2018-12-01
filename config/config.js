@@ -1,10 +1,6 @@
 const config = {
     //Any NONE GAME STATE config information goes under default
-    default: { 
-        player:{},
-        score: {},
-        debug: {}
-    },
+    default: {},
     loader:{
         x: 80,
         y: 150,
@@ -14,32 +10,32 @@ const config = {
         logo: 'assets/img/boilerplate-logo.png',
         background: "#000000",
         playerImage: {
-            src: 'assets/img/template-player-face.png',
+            src: 'assets/img/templatePlayerFace.png',
             key: "player"
         },
-        mapImage:{ 
+        mapImage:{
             src: 'assets/img/floorBG.png',
             key: "gameMap"
         },
         placeHolder: {
-            src: "assets/img/placeholder.png",
+            src: "assets/img/placeHolder.png",
             key: "placeHolder"
         },
         bgm: {
-            mp3: "assets/audio/bodenstaendig_2000_in_rock_4bit.mp3",
-            ogg: "assets/audio/bodenstaendig_2000_in_rock_4bit.ogg",
-            label:   "loadingScreen-bgm"
+            mp3: "assets/audio/bodenstaendig2000InRock4bit.mp3",
+            ogg: "assets/audio/bodenstaendig2000InRock4bit.ogg",
+            label:   "loadingScreenBgm"
         },
-        sceenImg: "assets/img/flame-blackBG.png",
+        screenImg: "",
         loadValue:  0,
         loadScreen:{
-            spriteSrc: "assets/img/Loading_Screen_Asset.png",
+            src: "assets/img/loadingScreenAsset.png",
             spriteLabel: "loadScreen",
             xPosition: 0,
             yPosition: 100
         },
         loadText:{
-            spriteSrc:      "assets/img/Loading_Text_Asset.png",
+            src:      "assets/img/loadingTextAsset.png",
             spriteLabel:    "loadText",
             xPosition: 0,
             yPosition: 10
@@ -48,29 +44,44 @@ const config = {
         velocity: 120
     },
     init:{
-        screenWidth: 375,
+        //screenWidth: 375,
+        screenWidth: 297,
         screenHeight: 812,
         phoneWidth: 360,
         phoneHeight: 740
+    },
+    boot:{
+        bootString : "...preparing to load."
     },
     menuState: {
         background: {
             xRegion: 0.5,
             yRegion: 0.5,
-            imageKey: "mainMenuBackground",
-            spriteSrc: "assets/img/Main_Menu_Red.png"
+            key: "mainMenuBackground",
+            src: "assets/img/mainMenuRed.png"
+        },
+        background2: {
+            xRegion: 0.5,
+            yRegion: 0.5,
+            key: "mainMenuBackground2",
+            src: "assets/img/mainMenuBlue.png",
+            opacityCycleDurationInSeconds: 7,
+            tweenToTransparentProperties: { alpha: 0 },
+            tweenToOpaqueProperties: { alpha: 1.0 },
+            tweenToTransparentEasing: Phaser.Easing.Quadratic.InOut,
+            tweenToOpaqueEasing: Phaser.Easing.Quadratic.InOut
         },
         title: {
             xRegion: 0.5,
             yRegion: 0.383,
-            imageKey: "titleGraphic",
-            spriteSrc: "assets/img/PathLight_Title_Asset.png"
+            key: "titleGraphic",
+            src: "assets/img/pathLightTitleAsset.png"
         },
         startButton: {
             xRegion: 0.5,
             yRegion: 0.496,
-            imageKey: "startButton",
-            spriteSrc: "assets/img/Start_Button_Asset.png",
+            key: "startButton",
+            src: "assets/img/startButtonAsset.png",
             opacityCycleDurationInSeconds: 3,
             tweenToTransparentProperties: { alpha: 0.5 },
             tweenToOpaqueProperties: { alpha: 1.0 },
@@ -80,8 +91,8 @@ const config = {
         startButtonDots: {
             xRegion: 0.5,
             yRegion: 0.5,
-            imageKey: "startButtonDots",
-            spriteSrc: "assets/img/Start_Dots_Asset.png"
+            key: "startButtonDots",
+            src: "assets/img/startDotsAsset.png"
         }
     },
     gameLoop:{
@@ -92,12 +103,6 @@ const config = {
             half: {},
             quarter: {}
         }
-    },
-    neutralMap:{
-        velocity: 120,
-        mapsCount: 2,
-        imgKey: "neutralMap",
-        imgSrc: "assets/img/Floor_BG_Asset.png"
     },
     gameOverState: {
         gameOverLabel: {
@@ -129,37 +134,132 @@ const config = {
         restartButton: {
             xRegion: 0.5,
             yRegion: 0.66,
-            imageKey: "restartButton",
-            spriteSrc: "assets/img/startButton.png" // TODO: Make restart button
+            key: "restartButton",
+            src: "assets/img/startButton.png" // TODO: Make restart button
         }
     }
+};
+//Settings should be initiated 1st out of all defaults
+config.default.settings = {
+    tileHeight: 58,
+    tileWidth:  74,
+    wrapOffset: -1,
+    mapVelocity: 50,
+    maxMapVelocity: 150,
+    difficultyInterval: 10000, //10 seconds
+    difficulty: "easy"
+};
+
+config.default.controls = {
+    mouse: 0,
+    keyboard: 1
 };
 
 config.default.player = {
     speed: 4,
-    imageKey: "player",
-    spriteSrc: "../spriteLocation.png"
+    controlType: config.default.controls.mouse,
+    color:  0xFFFFFF,
+    key: "player",
+    src: "../spriteLocation.png"
 };
 
-config.default.blocks = {
-    score: { //this model is subject to change
-        full: 25,
-        half: 50,
-        quarter: 100
-    }
+config.default.darkness = {
+    key: "darkness",
+    src: "assets/img/darknessLayer.png"
 }
 
+config.default.particles = {
+    key: "particles",
+    src: "assets/img/whiteParticle.png",
+    emitter: {},
+    offsetX: 0,
+    offsetY: 0
+}
+
+config.default.blocks = {
+    full: {
+        score: 25,
+        src: "assets/img/fullBlock.png",
+        key: "fullBlock"
+    },
+    half: {
+        score: 50,
+        src: "assets/img/halfBlock.png",
+        key: "halfBlock"
+    },
+    quarter: {
+        score: 100,
+        src: "assets/img/quarterBlock.png",
+        key: "quarterBlock"
+    }
+};
+
 config.default.score = {
-    style : {
-        font: "bold 30px Courier",
-        color: "#fff",
-    },    
-    interface: {},
     amount: 0,
-    bonus1: 1,
+    bonus: 1,
     text: "SCORE:",
-    x: 0,
-    y: 5
+    x: config.default.settings.tileWidth,
+    y: 5,
+    numOffsetX: 17,     // score value, number of spaces
+    sprites:{
+        scoreText:{
+            src: "assets/img/scoreTexts/scoreTextAsset.png",
+            key: "scoreText"
+        },
+        textNum0:{
+            src: "assets/img/scoreTexts/textNum0.png",
+            key: "textNum0"
+        },
+        textNum1:{
+            src: "assets/img/scoreTexts/textNum1.png",
+            key: "textNum1"
+        },
+        textNum2:{
+            src: "assets/img/scoreTexts/textNum2.png",
+            key: "textNum2"
+        },
+        textNum3:{
+            src: "assets/img/scoreTexts/textNum3.png",
+            key: "textNum3"
+        },
+        textNum4:{
+            src: "assets/img/scoreTexts/textNum4.png",
+            key: "textNum4"
+        },
+        textNum5:{
+            src: "assets/img/scoreTexts/textNum5.png",
+            key: "textNum5"
+        },
+        textNum6:{
+            src: "assets/img/scoreTexts/textNum6.png",
+            key: "textNum6"
+        },
+        textNum7:{
+            src: "assets/img/scoreTexts/textNum7.png",
+            key: "textNum7"
+        },
+        textNum8:{
+            src: "assets/img/scoreTexts/textNum8.png",
+            key: "textNum8"
+        },
+        textNum9:{
+            src: "assets/img/scoreTexts/textNum9.png",
+            key: "textNum9"
+        }
+    },
+};
+
+config.default.score.spriteMap = {
+    "0": config.default.score.sprites.textNum0.key,
+    "1": config.default.score.sprites.textNum1.key,
+    "2": config.default.score.sprites.textNum2.key,
+    "3": config.default.score.sprites.textNum3.key,
+    "4": config.default.score.sprites.textNum4.key,
+    "5": config.default.score.sprites.textNum5.key,
+    "6": config.default.score.sprites.textNum6.key,
+    "7": config.default.score.sprites.textNum7.key,
+    "8": config.default.score.sprites.textNum8.key,
+    "9": config.default.score.sprites.textNum9.key
 };
 
 config.default.debug = {
@@ -168,18 +268,113 @@ config.default.debug = {
 };
 
 config.default.neutralMap = {
-    velocity: 120,
-    mapsCount: 2,
+    xRegion: 0.5,
     key: "neutralMap",
-    src: "assets/img/Floor_BG_Asset.png"
-}
+    src: "assets/img/floorBgAsset.png"
+};
+
+config.default.difficultyModifiers = {
+    easy: {
+        velocityModifier: 0.75,
+        velocityIncrease: 0.10,
+        bonus: 0.75,
+    },
+    medium: {
+        velocityModifier: 1,
+        velocityIncrease: 0.15,
+        bonus: 1.0,
+    },
+    hard:{
+        velocityModifier: 1.25,
+        velocityIncrease: 0.25,
+        bonus: 1.25,
+    }
+};
 
 config.default.gameMap = {
+    startMarker: {
+        x: 0,
+        y: config.default.settings.tileHeight * -1
+    },
+    endMarker: {
+        x: 0,
+        y: config.default.settings.tileHeight * -14
+    },
     normalSpeed: 1,
     hardSpeed: 2
 };
 
-config.default.controls = {
-    mouse: 0,
-    keyboard: 1
-}
+config.default.colors = {
+    white: {
+        value: 0xFFFFFF,
+        amount: 0
+    },
+    // primaries
+    red: {
+        value: 0xFF0000,
+        amount: 0
+    },
+    yellow: {
+        value: 0xFFFF00,
+        amount: 0
+    },
+    blue: {
+        value: 0x0000FF,
+        amount: 0
+    },
+    // secondaries
+    orange: {
+        value: 0xFF8000,
+        amount: 0
+    },
+    purple: {
+        value: 0x800080,
+        amount: 0
+    },
+    green: {
+        value: 0x00FF00,
+        amount: 0
+    }
+};
+
+config.default.colorPickup = {
+    colorOptions: [
+        config.default.colors.red,
+        config.default.colors.yellow,
+        config.default.colors.blue
+    ],
+    pickupScore: 0,
+    tilesBetweenSpawns: {
+        min: 25,
+        max: 100
+    },
+    src: "assets/img/pickUpAsset.png",
+    key: "colorPickup"
+};
+
+config.default.colorStates = {
+    activeColors: ["color1", "color2"],
+    spawnedPickups: [],
+    blockColors:  [],
+    activeNumber: 0,
+    activeColorSIMPLE: "color"
+};
+
+config.default.mapUtilities = {
+    rowSize: 14,
+    columnSize: 4,
+    icons : {
+        full: 9,
+        half: 8,
+        quarter: 7,
+        pickup: 6,
+        colorBeam: 5
+    }
+};
+
+config.default.gameInformation = {
+    title: "PathLight",
+    htmlID: "gameContainer",
+    hackable: true,
+    devModeSimple: true
+};
