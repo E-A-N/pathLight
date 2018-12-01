@@ -1,7 +1,6 @@
 const tempDebug = {debug:{}};
 
 
-<<<<<<< HEAD
 var game = new Phaser.Game(
     config.init.screenWidth,
     config.init.screenHeight,
@@ -37,16 +36,3 @@ if (config.default.gameInformation.hackable === true) {
         config.default.gameInformation.devModeSimple = simpleMode;
     }
 }
-=======
-var game = new Phaser.Game(w, h, Phaser.AUTO, 'gameContainer');
-
-//protected and none global!!
-if (config.default.debug.isOn === true){
-    let query = new URLSearchParams(window.location.search);
-    let width =  Number(query.get("dWidth"))  || config.init.screenWidth;
-    let height = Number(query.get("dHeight")) || config.init.screenHeight;
-
-    game._width = width;
-    game._height = height;
-}
->>>>>>> e8243660852e2a7a79d192ec3d174c7a7f974c27
