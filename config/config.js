@@ -337,6 +337,19 @@ config.default.colors = {
     }
 };
 
+config.default.colorLookup = {
+    0xFFFFFF: 'white',
+    // primaries
+    0xFF0000: 'red',
+    0xFFFF00: 'yellow',
+    0x0000FF: 'blue',
+
+    // secondaries
+    0xFF8000: "orange",
+    0x800080: "purpole",
+    0x00FF00: "green"
+};
+
 config.default.colorPickup = {
     colorOptions: [
         config.default.colors.red,

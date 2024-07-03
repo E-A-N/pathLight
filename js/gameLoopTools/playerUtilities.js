@@ -16,8 +16,11 @@ playerUtilities.create = (player) => {
 playerUtilities.update = (player) => {
     playerUtilities.move(player, player.controlType);
     for (let i in objectSpawner.activeObjectPool){
-        let colorObject = objectSpawner.activeObjectPool[i].sprite;
-        playerUtilities.colorCollision(player.sprite, colorObject);
+        let colorObject = objectSpawner.activeObjectPool[i];
+        if (player.color === colorObject.color){
+            playerUtilities.colorCollision(player.sprite, colorObject.sprite);
+
+        }
     }
 };
 
