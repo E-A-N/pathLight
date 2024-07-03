@@ -17,6 +17,7 @@ playerUtilities.update = (player) => {
     playerUtilities.move(player, player.controlType);
     for (let i in objectSpawner.activeObjectPool){
         let colorObject = objectSpawner.activeObjectPool[i];
+        // console.log(player.color, colorObject.color.value, player.color === colorObject.color.value);
         if (player.color === colorObject.color){
             playerUtilities.colorCollision(player.sprite, colorObject.sprite);
 
@@ -25,16 +26,20 @@ playerUtilities.update = (player) => {
 };
 
 playerUtilities.collisionInit = (item) => {
-    console.log("color thing spawned!!!", item.type)
-    switch (item.type){
-        case "color":
-            playerUtilities.colorCollision(playerUtilities.player.sprite, item.sprite);
-        break;
+    console.log("color thing spawned!!!", 
+        item.color.value, 
+        gameLoop.player.color,
+        item.color.value === gameLoop.player.color
+    );
+    // switch (item.type){
+    //     case "color":
+    //         playerUtilities.colorCollision(playerUtilities.player.sprite, item.sprite);
+    //     break;
 
-        case "fullBlock":
+    //     case "fullBlock":
 
-        break;
-    }
+    //     break;
+    // }
 };
 
 playerUtilities.colorCollision = (player, color) => {

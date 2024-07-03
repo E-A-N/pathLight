@@ -26,6 +26,7 @@ gameLoop = {
         mapController.init();
         neutralMap.init();
         objectSpawner.init();
+        gameLoop.colorController = setInterval(gameLoop.randomColorUpdate, 3000);
     },
 
     create: () => {
@@ -103,5 +104,16 @@ gameLoop = {
         let interval = setInterval(...intervalData);
 
         return interval;
+    },
+
+    randomColorUpdate: () => {
+        if(game.state.current !== "gameLoop"){
+            clearInterval(gameLoop.colorController);
+            return;
+        }
+        let choice = Math.floor(Math.random() * config.default.colorPickup.colorOptions.length);
+        let newColor = config.default.colorPickup.colorOptions[choice];
+        gameLoop.player.color = newColor.value;
+        // console.log("Players new color is now:", choice, newColor.value, config.default.colorLookup[newColor.value]);
     }
 };

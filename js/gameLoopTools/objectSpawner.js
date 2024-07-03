@@ -39,9 +39,10 @@ objectSpawner.assignNextDistanceUntilColorPickupSpawn = () => {
 };
 
 objectSpawner.spawnColorPickup = () => {
+    let choice = Math.floor(Math.random() * config.default.colorPickup.colorOptions.length);
     let colorPickup = {
         type: "color",
-        color: objectSpawner.colorPickup.colorOptions[randomUtilities.randomInt(0, objectSpawner.colorPickup.colorOptions.length)],
+        color: objectSpawner.colorPickup.colorOptions[choice],
         id: objectSpawner.id++
     };
 
