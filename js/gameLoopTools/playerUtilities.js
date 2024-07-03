@@ -15,9 +15,14 @@ playerUtilities.create = (player) => {
 
 playerUtilities.update = (player) => {
     playerUtilities.move(player, player.controlType);
+    for (let i in objectSpawner.activeObjectPool){
+        let colorObject = objectSpawner.activeObjectPool[i].sprite;
+        playerUtilities.colorCollision(player.sprite, colorObject);
+    }
 };
 
 playerUtilities.collisionInit = (item) => {
+    console.log("color thing spawned!!!", item.type)
     switch (item.type){
         case "color":
             playerUtilities.colorCollision(playerUtilities.player.sprite, item.sprite);
@@ -31,7 +36,7 @@ playerUtilities.collisionInit = (item) => {
 
 playerUtilities.colorCollision = (player, color) => {
     game.physics.arcade.collide(player, color, (spr1, spr2) => {
-        console.log("arg is:", spr1);
+        console.log("collision is happening!!");
     });
 }
 
