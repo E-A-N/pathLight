@@ -60,11 +60,11 @@ objectSpawner.spawnColorPickup = () => {
         ];
         colorPickup.sprite = game.add.sprite(...colorPickupData);
         colorPickup.sprite.anchor.setTo(...objectSpawner.graphicCenter);
-        objectSpawner.generateBlurGlow(colorPickup);
     }
     else {
         colorPickup.sprite = objectSpawner.inactiveObjectPool.pop();
     }
+    objectSpawner.generateBlurGlow(colorPickup);
     game.physics.enable(colorPickup.sprite, Phaser.Physics.ARCADE);
     colorPickup.sprite.enableBody = true;
     let minX = colorPickup.sprite.width * colorPickup.sprite.anchor.x;
@@ -73,9 +73,11 @@ objectSpawner.spawnColorPickup = () => {
     objectSpawner.activeObjectPool[colorPickup.id] = colorPickup;
     colorPickup.sprite.x = randomUtilities.randomRange(minX, maxX);
     colorPickup.sprite.tint = colorPickup.color.value;
-    colorPickup.sprite.onFullyLeftMap = (sprite) => {
-        objectSpawner.disableObject(sprite);
+    colorPickup.sprite.onFullyLeftMap = () => {
+        objectSpawner.disableObject(colorPickup.sprite);
         objectSpawner.stopTween(colorPickup.blurGlow);
+        colorPickup.blurGlow.sprite.destroy();
+        colorPickup.blurGlow = null;
     }
     
     colorPickup.sprite.enabled = true;
@@ -133,7 +135,6 @@ objectSpawner.stopTween = (blurGlow) => {
         blurGlow.tween = null;
         blurGlow.sprite.scale.x = 1;
         blurGlow.sprite.scale.y = 1;
-
     }
 }
 

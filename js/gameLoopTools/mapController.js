@@ -95,7 +95,7 @@ mapController.update = () => {
 
         if (mapController.bottom <= objectTop) {
             if (typeof (object.onFullyLeftMap) === "function") {
-                object.onFullyLeftMap(object);    // This delegate acts as an override to the default auto-destroy behavior
+                object.onFullyLeftMap();    // This delegate acts as an override to the default auto-destroy behavior
             }
             else {
                 object.destroy();
