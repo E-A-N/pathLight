@@ -172,8 +172,12 @@ config.default.particles = {
     key: "particles",
     src: "assets/img/whiteParticle.png",
     emitter: {},
-    offsetX: 0,
-    offsetY: 0
+    offsetX: -23,
+    offsetY: -27,
+    faceOffsetX: -23,
+    faceOffsetY: -27,
+    backOffsetX: 23,
+    backOffsetY: -27
 }
 
 config.default.blocks = {
