@@ -3,7 +3,7 @@ const objectSpawner = {};
 objectSpawner.inactiveObjectPool;
 objectSpawner.activeObjectPool = {};
 objectSpawner.distanceUntilNextColorPickupSpawn;
-
+objectSpawner.blurGlows = [];
 objectSpawner.init = (data) => {
     data = typeof data === "undefined" ? {} : data;
     objectSpawner.colorPickup = data.colorPickup || config.default.colorPickup;
@@ -29,6 +29,11 @@ objectSpawner.update = () => {
         if (pickupEventInitiated){
             objectSpawner.onSpawn(pickup)
         }
+    }
+
+    for (let i in objectSpawner.blurGlows){
+        let blurGlow = objectSpawner.blurGlows[i];
+        objectSpawner.updateBlurGlow(blurGlow);
     }
 };
 
@@ -81,10 +86,38 @@ objectSpawner.generateBlurGlow = (target) => {
         target.sprite.y,
         config.default.blurGlow.key
     ];
+    let blurGlow = {};
+    blurGlow.tween = null;
+    blurGlow.parent = target;
+    blurGlow.sprite = game.add.sprite(...blurGlowImageData);
+    blurGlow.sprite.x = target.sprite.x;
+    blurGlow.sprite.y = target.sprite.y;
+    blurGlow.sprite.anchor.setTo(...objectSpawner.graphicCenter);
+    blurGlow.sprite.tint = target.color.value;
+    objectSpawner.initBlurGlowTween(blurGlow);
+    objectSpawner.blurGlows.push(blurGlow);
 
-    target.blurGlow = game.add.sprite(...blurGlowImageData);
-    target.blurGlow.anchor.setTo(...objectSpawner.graphicCenter);
-    target.blurGlow.tint = target.color.value;
+}
+
+objectSpawner.updateBlurGlow = (blurGlow) => {
+    blurGlow.sprite.x = blurGlow.parent.sprite.x;
+    blurGlow.sprite.y = blurGlow.parent.sprite.y;
+    blurGlow.sprite.anchor.setTo(...objectSpawner.graphicCenter);
+    blurGlow.sprite.tint = blurGlow.parent.color.value;
+}
+
+objectSpawner.initBlurGlowTween = (blurGlow) => {
+    blurGlow.tween = game.add.tween(blurGlow.sprite.scale)
+        .to({ x: 2, y: 2 }, 1000, Phaser.Easing.Quadratic.InOut) // Smooth easing in/out
+        .to({ x: 1, y: 1 }, 1000, Phaser.Easing.Quadratic.InOut) // Smooth easing in/out
+        .loop(true) // Loop the tween
+        .start(); // Start the tween
+}
+
+objectSpawner.stopTween = (blurGlow) => {
+    if (blurGlow.tween !== null) {
+        blurGlow.tween.stop(); // Stop the tween if it's currently running
+    }
 }
 
 objectSpawner.disableObject = (object) => {

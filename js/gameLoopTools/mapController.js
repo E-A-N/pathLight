@@ -73,7 +73,9 @@ mapController.update = () => {
             object.y += mapController.speed;
         }
 
-
+        if (object.type === "color"){
+            objectSpawner.updateBlurGlow(object);
+        }
         let objectTop = transformUtilities.getTopPosition(object.y, object.height, object.anchor.y);
 
         if (object.fullyOnMap === false) {
