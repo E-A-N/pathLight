@@ -26,11 +26,11 @@ playerUtilities.update = (player) => {
 };
 
 playerUtilities.collisionInit = (item) => {
-    console.log("color thing spawned!!!", 
-        item.color.value, 
-        gameLoop.player.color,
-        item.color.value === gameLoop.player.color
-    );
+    // console.log("color thing spawned!!!", 
+    //     item.color.value, 
+    //     gameLoop.player.color,
+    //     item.color.value === gameLoop.player.color
+    // );
     // switch (item.type){
     //     case "color":
     //         playerUtilities.colorCollision(playerUtilities.player.sprite, item.sprite);

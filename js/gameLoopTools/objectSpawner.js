@@ -94,21 +94,29 @@ objectSpawner.generateBlurGlow = (target) => {
     blurGlow.sprite.y = target.sprite.y;
     blurGlow.sprite.anchor.setTo(...objectSpawner.graphicCenter);
     blurGlow.sprite.tint = target.color.value;
-    objectSpawner.initBlurGlowTween(blurGlow);
     objectSpawner.blurGlows.push(blurGlow);
 
 }
 
 objectSpawner.updateBlurGlow = (blurGlow) => {
+    if (playerUtilities.player.color === blurGlow.parent.color.value){
+        if (blurGlow.tween === null){
+            objectSpawner.initBlurGlowTween(blurGlow)
+        }
+    }
+    else {
+        objectSpawner.stopTween(blurGlow)
+    }
     blurGlow.sprite.x = blurGlow.parent.sprite.x;
     blurGlow.sprite.y = blurGlow.parent.sprite.y;
+    blurGlow.sprite.z = 2;
     blurGlow.sprite.anchor.setTo(...objectSpawner.graphicCenter);
     blurGlow.sprite.tint = blurGlow.parent.color.value;
 }
 
 objectSpawner.initBlurGlowTween = (blurGlow) => {
     blurGlow.tween = game.add.tween(blurGlow.sprite.scale)
-        .to({ x: 2, y: 2 }, 1000, Phaser.Easing.Quadratic.InOut) // Smooth easing in/out
+        .to({ x: 3, y: 3 }, 1000, Phaser.Easing.Quadratic.InOut) // Smooth easing in/out
         .to({ x: 1, y: 1 }, 1000, Phaser.Easing.Quadratic.InOut) // Smooth easing in/out
         .loop(true) // Loop the tween
         .start(); // Start the tween
@@ -117,6 +125,10 @@ objectSpawner.initBlurGlowTween = (blurGlow) => {
 objectSpawner.stopTween = (blurGlow) => {
     if (blurGlow.tween !== null) {
         blurGlow.tween.stop(); // Stop the tween if it's currently running
+        blurGlow.tween = null;
+        blurGlow.sprite.scale.x = 1;
+        blurGlow.sprite.scale.y = 1;
+
     }
 }
 
