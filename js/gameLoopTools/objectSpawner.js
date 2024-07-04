@@ -100,7 +100,7 @@ objectSpawner.generateBlurGlow = (target) => {
     blurGlow.sprite.tint = target.color.value;
     target.blurGlow = blurGlow;
     objectSpawner.blurGlows.push(blurGlow);
-
+    game.world.sendToBack(blurGlow.sprite);
 }
 
 objectSpawner.updateBlurGlow = (blurGlow) => {

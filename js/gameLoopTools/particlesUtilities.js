@@ -22,6 +22,7 @@ particlesUtilities.update = (particles, player) => {
 
     px *= -1;
     py *= -1;
+    game.world.bringToTop(particles.emitter);
 
     particles.emitter.minParticleSpeed.set(px, py);
     particles.emitter.maxParticleSpeed.set(px, py);

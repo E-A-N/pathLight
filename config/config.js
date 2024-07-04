@@ -41,7 +41,7 @@ const config = {
             yPosition: 10
         },
         cursors: {},
-        velocity: 120
+        velocity: 80
     },
     init:{
         //screenWidth: 375,
@@ -156,7 +156,7 @@ config.default.controls = {
 };
 
 config.default.player = {
-    speed: 4,
+    speed: 2,
     controlType: config.default.controls.mouse,
     color:  0xffffff,
     key: "player",

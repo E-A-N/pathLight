@@ -1,21 +1,25 @@
 const playerUtilities = {};
 playerUtilities.create = (player) => {
   // clicking the mouse during this state will change the control type to mouse
-
     game.input.onDown.add( () => {
       player.controlType = config.default.controls.mouse;
     });
     game.physics.enable(player.sprite, Phaser.Physics.ARCADE);
     player.sprite.enableBody = true;
     player.sprite.body.collideWorldBounds  = true;
+    player.sprite.z = -10;
     const spriteCenter = [0.5, 0.5];
     player.sprite.anchor.setTo(...spriteCenter);
+    player.blurGlow = null;
+    playerUtilities.generateBlurGlow(player);
     playerUtilities.player = player;
+    game.world.bringToTop(player.sprite);
 };
 
 playerUtilities.update = (player) => {
     let priorY = player.sprite.y;
     let priorX = player.sprite.x;
+
     playerUtilities.move(player, player.controlType);
     for (let i in objectSpawner.activeObjectPool){
         let colorObject = objectSpawner.activeObjectPool[i];
@@ -31,18 +35,15 @@ playerUtilities.update = (player) => {
         let name = player.sprite.animations.currentAnim.name;
         if (priorY > currentY && name !== "walkAwayAnime"){
             gameLoop.player.sprite.animations.play("walkAwayAnime");
-            console.log(name, "playing");
         }
         else if (priorY < currentY && name !== "walkFaceAnime"){
             gameLoop.player.sprite.animations.play("walkFaceAnime");
-            console.log(name, "playing");
-
         }
         else if (priorX === currentX && name !== "playerIdle"){
             gameLoop.player.sprite.animations.play("playerIdle");
-            console.log(name, "playing");
         }
     }
+    playerUtilities.updateBlurGlow(player);
 };
 
 playerUtilities.colorCollision = (player, colorObject) => {
@@ -112,3 +113,36 @@ playerUtilities.keyboardMovement = (player, playerSpeed) => {
     if (xVelocityInput != 0 || yVelocityInput != 0)
         player.controlType = config.default.controls.keyboard;
 };
+
+playerUtilities.generateBlurGlow = (target) => {
+    let blurGlowImageData = [
+        target.sprite.x,
+        target.sprite.y,
+        config.default.blurGlow.key
+    ];
+    let blurGlow = {};
+    blurGlow.tween = null;
+    blurGlow.parent = target;
+    blurGlow.sprite = game.add.sprite(...blurGlowImageData);
+    blurGlow.sprite.x = target.sprite.x;
+    blurGlow.sprite.y = target.sprite.y;
+    blurGlow.sprite.anchor.setTo(...objectSpawner.graphicCenter);
+    blurGlow.sprite.tint = target.color
+    blurGlow.sprite.alpha = 0.5;
+    blurGlow.sprite.z = 3;
+    target.blurGlow = blurGlow;
+}
+
+playerUtilities.updateBlurGlow = (player) => {
+    let blurGlow = player.blurGlow;
+    if(!blurGlow){
+        return;
+    }
+    if (blurGlow.tween === null){
+        objectSpawner.initBlurGlowTween(blurGlow)
+    }
+    blurGlow.sprite.x = blurGlow.parent.sprite.x;
+    blurGlow.sprite.y = blurGlow.parent.sprite.y;
+    blurGlow.sprite.anchor.setTo(...objectSpawner.graphicCenter);
+    blurGlow.sprite.tint = blurGlow.parent.color
+}
