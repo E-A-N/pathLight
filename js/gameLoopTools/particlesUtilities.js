@@ -13,7 +13,7 @@ particlesUtilities.create = (particles, player) => {
 
     //	false means don't explode all the sprites at once, but instead release at a rate of one particle per 100ms
     //	The 5000 value is the lifespan of each particle before it's killed
-    particles.emitter.start(false, 1000, 100);
+    // particles.emitter.start(false, 1000, 100);
 };
 
 particlesUtilities.update = (particles, player) => {

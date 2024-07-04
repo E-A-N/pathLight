@@ -14,12 +14,33 @@ playerUtilities.create = (player) => {
 };
 
 playerUtilities.update = (player) => {
+    let priorY = player.sprite.y;
+    let priorX = player.sprite.x;
     playerUtilities.move(player, player.controlType);
     for (let i in objectSpawner.activeObjectPool){
         let colorObject = objectSpawner.activeObjectPool[i];
         // console.log(player.color, colorObject.color.value, player.color === colorObject.color.value);
         if (player.color === colorObject.color.value){
             playerUtilities.colorCollision(player, colorObject);
+        }
+    }
+
+    let currentY = player.sprite.y;
+    let currentX = player.sprite.x;
+    if (player.sprite.animations.currentAnim){
+        let name = player.sprite.animations.currentAnim.name;
+        if (priorY > currentY && name !== "walkAwayAnime"){
+            gameLoop.player.sprite.animations.play("walkAwayAnime");
+            console.log(name, "playing");
+        }
+        else if (priorY < currentY && name !== "walkFaceAnime"){
+            gameLoop.player.sprite.animations.play("walkFaceAnime");
+            console.log(name, "playing");
+
+        }
+        else if (priorX === currentX && name !== "playerIdle"){
+            gameLoop.player.sprite.animations.play("playerIdle");
+            console.log(name, "playing");
         }
     }
 };
