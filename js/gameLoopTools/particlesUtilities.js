@@ -33,12 +33,12 @@ particlesUtilities.update = (particles, player) => {
     if (player.sprite.animations.currentAnim){
         let name = player.sprite.animations.currentAnim.name;
         switch (name){
-            case "walkAwayAnime":
+            case "walkAwayFrames":
                 offsetX = config.default.particles.backOffsetX;
                 offsetY = config.default.particles.backOffsetY;
             break;
 
-            case "walkFaceAnime":
+            case "walkFacingFrames":
                 offsetX = config.default.particles.faceOffsetX;
                 offsetY = config.default.particles.faceOffsetY;
             break;

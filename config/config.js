@@ -412,28 +412,13 @@ config.default.gameInformation = {
 };
 
 config.player = {};
-config.player.animations = {};
-config.player.animations.death = [
-    ["death_1.png", "assets/img/animations/death_1.png"],
-    ["death_2.png", "assets/img/animations/death_2.png"],    
-    ["death_3.png", "assets/img/animations/death_3.png"],    
-    ["death_4.png", "assets/img/animations/death_4.png"],    
-    ["death_5.png", "assets/img/animations/death_5.png"],    
-    ["death_6.png", "assets/img/animations/death_6.png"],    
-];
-
-config.player.animations.playerAnims = ["playerAnims", "assets/img/animations/playerAnims.png"];
-
-config.player.animations.walkAway = [
-    ["walkAway_1.png", "assets/img/animations/walkAway_1.png"],
-    ["walkAway_2.png", "assets/img/animations/walkAway_2.png"],   
-    ["walkAway_3.png", "assets/img/animations/walkAway_3.png"],   
-    ["walkAway_4.png", "assets/img/animations/walkAway_4.png"],   
-];
-
-config.player.animations.walkFacing = [
-    ["walkFacing_1.png", "assets/img/animations/walkFacing_1.png"],
-    ["walkFacing_2.png", "assets/img/animations/walkFacing_2.png"],
-    ["walkFacing_3.png", "assets/img/animations/walkFacing_3.png"],
-    ["walkFacing_4.png", "assets/img/animations/walkFacing_4.png"],
-];
+config.player.animations = {
+    key: "playerAnims", 
+    src: "assets/img/animations/playerAnimations.png",
+    deathFrames: [0,1,2,3,4,5],
+    deathTorchFrames: [6,7,8,9,10,11],
+    walkAwayFrames: [12,13,14,15],
+    walkAwayTorchFrames: [16,17,18,19],
+    walkFacingFrames: [20, 21,22, 23],
+    walkFackingTorchFraes: [24,25,26,27]
+}

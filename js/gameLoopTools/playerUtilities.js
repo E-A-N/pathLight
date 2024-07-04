@@ -33,11 +33,11 @@ playerUtilities.update = (player) => {
     let currentX = player.sprite.x;
     if (player.sprite.animations.currentAnim){
         let name = player.sprite.animations.currentAnim.name;
-        if (priorY > currentY && name !== "walkAwayAnime"){
-            gameLoop.player.sprite.animations.play("walkAwayAnime");
+        if (priorY > currentY && name !== "walkAwayFrames"){
+            gameLoop.player.sprite.animations.play("walkAwayFrames");
         }
-        else if (priorY < currentY && name !== "walkFaceAnime"){
-            gameLoop.player.sprite.animations.play("walkFaceAnime");
+        else if (priorY < currentY && name !== "walkFacingFrames"){
+            gameLoop.player.sprite.animations.play("walkFacingFrames");
         }
         else if (priorX === currentX && name !== "playerIdle"){
             gameLoop.player.sprite.animations.play("playerIdle");
@@ -47,7 +47,7 @@ playerUtilities.update = (player) => {
 };
 
 playerUtilities.colorCollision = (player, colorObject) => {
-    game.physics.arcade.collide(player, colorObject.sprite, (spr1, spr2) => {
+    game.physics.arcade.collide(player.sprite, colorObject.sprite, (spr1, spr2) => {
         console.log("collision is happening!!");
     });
 }

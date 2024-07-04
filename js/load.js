@@ -163,24 +163,9 @@ loadState = {
         game.load.image(config.default.score.sprites.textNum9.key, config.default.score.sprites.textNum9.src);
    
         //player animations
-        for (let i in config.player.animations.death){
-            let anime = config.player.animations.death[i];
-            game.load.image(anime[0], anime[1]);
-        }
-
-        for (let i in config.player.animations.walkAway){
-            let anime = config.player.animations.walkAway[i];
-            game.load.image(anime[0], anime[1]);
-        }
-
-        for (let i in config.player.animations.walkFacing){
-            let anime = config.player.animations.walkFacing[i];
-            game.load.image(anime[0], anime[1]);
-        }
-
         game.load.spritesheet(
-            config.player.animations.playerAnims[0], 
-            config.player.animations.playerAnims[1],
+            config.player.animations.key, 
+            config.player.animations.src,
             60,
             70
         );

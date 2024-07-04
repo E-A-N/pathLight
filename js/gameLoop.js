@@ -43,10 +43,38 @@ gameLoop = {
         ];
         gameLoop.player.sprite = game.add.sprite(...playerStartData);
 
-        let deathAnim = gameLoop.player.sprite.animations.add('deathAnim', [0,1,2,3,4,5], 5, true);
-        let anim2 = gameLoop.player.sprite.animations.add('walkAwayAnime', [6,7,8,9], 5, true);
-        let anim3 = gameLoop.player.sprite.animations.add('walkFaceAnime', [10,11,12,13], 5, true);
-        let anim4 = gameLoop.player.sprite.animations.add('playerIdle', [13], 1, true);
+        let deathAniData = [
+            "deathFrames",
+            config.player.animations["deathFrames"],
+            5,
+            true
+        ];
+        gameLoop.player.sprite.animations.add(...deathAniData);
+
+        let walkAwayAniData = [
+            "walkAwayFrames",
+            config.player.animations["walkAwayFrames"],
+            5,
+            true
+        ];
+        gameLoop.player.sprite.animations.add(...walkAwayAniData);
+
+
+        let walkFacingAniData = [
+            "walkFacingFrames",
+            config.player.animations["walkFacingFrames"],
+            5,
+            true
+        ];
+        gameLoop.player.sprite.animations.add(...walkFacingAniData);
+
+        let idleAniData = [
+            "playerIdle",
+            [config.player.animations["walkFacingFrames"][0]],
+            1,
+            true
+        ];
+        gameLoop.player.sprite.animations.add(...idleAniData);
 
         gameLoop.player.sprite.animations.play("playerIdle");
 
