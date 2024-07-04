@@ -144,6 +144,7 @@ loadState = {
         game.load.image(config.default.neutralMap.key, config.default.neutralMap.src);
         game.load.image(config.default.darkness.key, config.default.darkness.src);
         game.load.image(config.default.particles.key, config.default.particles.src);
+        game.load.image(config.default.blurGlow.key, config.default.blurGlow.src);
 
         // Game over loads
         game.load.image(config.gameOverState.restartButton.key, config.gameOverState.restartButton.src);

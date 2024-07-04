@@ -35,7 +35,7 @@ const config = {
             yPosition: 100
         },
         loadText:{
-            src:      "assets/img/loadingTextAsset.png",
+            src: "assets/img/loadingTextAsset.png",
             spriteLabel:    "loadText",
             xPosition: 0,
             yPosition: 10
@@ -158,7 +158,7 @@ config.default.controls = {
 config.default.player = {
     speed: 4,
     controlType: config.default.controls.mouse,
-    color:  0xFFFFFF,
+    color:  0xffffff,
     key: "player",
     src: "../spriteLocation.png"
 };
@@ -306,25 +306,25 @@ config.default.gameMap = {
 
 config.default.colors = {
     white: {
-        value: 0xFFFFFF,
+        value: 0xffffff,
         amount: 0
     },
     // primaries
     red: {
-        value: 0xFF0000,
+        value: 0xff0000,
         amount: 0
     },
     yellow: {
-        value: 0xFFFF00,
+        value: 0xffff00,
         amount: 0
     },
     blue: {
-        value: 0x0000FF,
+        value: 0x0000ff,
         amount: 0
     },
     // secondaries
     orange: {
-        value: 0xFF8000,
+        value: 0xff8000,
         amount: 0
     },
     purple: {
@@ -332,22 +332,22 @@ config.default.colors = {
         amount: 0
     },
     green: {
-        value: 0x00FF00,
+        value: 0x00ff00,
         amount: 0
     }
 };
 
 config.default.colorLookup = {
-    0xFFFFFF: 'white',
+    0xffffff: 'white',
     // primaries
-    0xFF0000: 'red',
-    0xFFFF00: 'yellow',
-    0x0000FF: 'blue',
+    0xff0000: 'red',
+    0xffff00: 'yellow',
+    0x0000ff: 'blue',
 
     // secondaries
-    0xFF8000: "orange",
+    0xff8000: "orange",
     0x800080: "purpole",
-    0x00FF00: "green"
+    0x00ff00: "green"
 };
 
 config.default.colorPickup = {
@@ -363,6 +363,21 @@ config.default.colorPickup = {
     },
     src: "assets/img/pickUpAsset.png",
     key: "colorPickup"
+};
+
+config.default.blurGlow = {
+    colorOptions: [
+        config.default.colors.red,
+        config.default.colors.yellow,
+        config.default.colors.blue
+    ],
+    pickupScore: 0,
+    tilesBetweenSpawns: {
+        min: 25,
+        max: 100
+    },
+    src: "assets/img/blurGlow.png",
+    key: "blurGlow"
 };
 
 config.default.colorStates = {

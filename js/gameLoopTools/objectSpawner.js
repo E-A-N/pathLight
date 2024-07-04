@@ -55,6 +55,7 @@ objectSpawner.spawnColorPickup = () => {
         ];
         colorPickup.sprite = game.add.sprite(...colorPickupData);
         colorPickup.sprite.anchor.setTo(...objectSpawner.graphicCenter);
+        objectSpawner.generateBlurGlow(colorPickup);
     }
     else {
         colorPickup.sprite = objectSpawner.inactiveObjectPool.pop();
@@ -73,6 +74,18 @@ objectSpawner.spawnColorPickup = () => {
 
     return colorPickup;
 };
+
+objectSpawner.generateBlurGlow = (target) => {
+    let blurGlowImageData = [
+        target.sprite.x,
+        target.sprite.y,
+        config.default.blurGlow.key
+    ];
+
+    target.blurGlow = game.add.sprite(...blurGlowImageData);
+    target.blurGlow.anchor.setTo(...objectSpawner.graphicCenter);
+    target.blurGlow.tint = target.color.value;
+}
 
 objectSpawner.disableObject = (object) => {
 
