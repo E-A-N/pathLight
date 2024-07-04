@@ -18,32 +18,14 @@ playerUtilities.update = (player) => {
     for (let i in objectSpawner.activeObjectPool){
         let colorObject = objectSpawner.activeObjectPool[i];
         // console.log(player.color, colorObject.color.value, player.color === colorObject.color.value);
-        if (player.color === colorObject.color){
-            playerUtilities.colorCollision(player.sprite, colorObject.sprite);
-
+        if (player.color === colorObject.color.value){
+            playerUtilities.colorCollision(player, colorObject);
         }
     }
 };
 
-playerUtilities.collisionInit = (item) => {
-    // console.log("color thing spawned!!!", 
-    //     item.color.value, 
-    //     gameLoop.player.color,
-    //     item.color.value === gameLoop.player.color
-    // );
-    // switch (item.type){
-    //     case "color":
-    //         playerUtilities.colorCollision(playerUtilities.player.sprite, item.sprite);
-    //     break;
-
-    //     case "fullBlock":
-
-    //     break;
-    // }
-};
-
-playerUtilities.colorCollision = (player, color) => {
-    game.physics.arcade.collide(player, color, (spr1, spr2) => {
+playerUtilities.colorCollision = (player, colorObject) => {
+    game.physics.arcade.collide(player, colorObject.sprite, (spr1, spr2) => {
         console.log("collision is happening!!");
     });
 }
@@ -52,6 +34,8 @@ playerUtilities.colorCollision = (player, color) => {
 playerUtilities.move = (player, type) => {
     let mouseType    = type === 0;
     let keyboardType = type === 1;
+    // let animeName = player.sprite.currentAnim.name;
+    let priorY = player.sprite.y;
 
     if (mouseType) {
         playerUtilities.mouseMovement(player, player.speed);
@@ -59,6 +43,9 @@ playerUtilities.move = (player, type) => {
 
     // Keyboard movement is always listening, and will turn off mouse movement if any keyboard movement key is hit
     playerUtilities.keyboardMovement(player, player.speed);
+
+    let currentY = player.sprite.y;
+    // console.log("eandebug:", animeName, priorY, currentY);
 
     return type;
 };

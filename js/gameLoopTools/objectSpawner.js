@@ -73,7 +73,11 @@ objectSpawner.spawnColorPickup = () => {
     objectSpawner.activeObjectPool[colorPickup.id] = colorPickup;
     colorPickup.sprite.x = randomUtilities.randomRange(minX, maxX);
     colorPickup.sprite.tint = colorPickup.color.value;
-    colorPickup.sprite.onFullyLeftMap = objectSpawner.disableObject;
+    colorPickup.sprite.onFullyLeftMap = (sprite) => {
+        objectSpawner.disableObject(sprite);
+        objectSpawner.stopTween(colorPickup.blurGlow);
+    }
+    
     colorPickup.sprite.enabled = true;
     mapController.addToTopOfMap(colorPickup.sprite);
 
@@ -94,6 +98,7 @@ objectSpawner.generateBlurGlow = (target) => {
     blurGlow.sprite.y = target.sprite.y;
     blurGlow.sprite.anchor.setTo(...objectSpawner.graphicCenter);
     blurGlow.sprite.tint = target.color.value;
+    target.blurGlow = blurGlow;
     objectSpawner.blurGlows.push(blurGlow);
 
 }
@@ -116,15 +121,15 @@ objectSpawner.updateBlurGlow = (blurGlow) => {
 
 objectSpawner.initBlurGlowTween = (blurGlow) => {
     blurGlow.tween = game.add.tween(blurGlow.sprite.scale)
-        .to({ x: 3, y: 3 }, 1000, Phaser.Easing.Quadratic.InOut) // Smooth easing in/out
-        .to({ x: 1, y: 1 }, 1000, Phaser.Easing.Quadratic.InOut) // Smooth easing in/out
-        .loop(true) // Loop the tween
-        .start(); // Start the tween
+        .to({ x: 3, y: 3 }, 1000, Phaser.Easing.Quadratic.InOut) 
+        .to({ x: 1, y: 1 }, 1000, Phaser.Easing.Quadratic.InOut)
+        .loop(true)
+        .start();
 }
 
 objectSpawner.stopTween = (blurGlow) => {
     if (blurGlow.tween !== null) {
-        blurGlow.tween.stop(); // Stop the tween if it's currently running
+        blurGlow.tween.stop();
         blurGlow.tween = null;
         blurGlow.sprite.scale.x = 1;
         blurGlow.sprite.scale.y = 1;
@@ -132,12 +137,12 @@ objectSpawner.stopTween = (blurGlow) => {
     }
 }
 
-objectSpawner.disableObject = (object) => {
-
-    object.enabled = false;
-    object.enableBody = false;
-    delete objectSpawner.activeObjectPool[object._spawnParent.id];
-    objectSpawner.inactiveObjectPool.push(object);
+objectSpawner.disableObject = (sprite) => {
+    console.log("eandebug on fully left map!!!");
+    sprite.enabled = false;
+    sprite.enableBody = false;
+    delete objectSpawner.activeObjectPool[sprite._spawnParent.id];
+    objectSpawner.inactiveObjectPool.push(sprite);
 };
 
 objectSpawner.onSpawn = null;

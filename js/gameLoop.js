@@ -39,9 +39,42 @@ gameLoop = {
         let playerStartData = [
             gameLoop.width  * gameLoop.xStartRegion,
             gameLoop.height * gameLoop.yStartRegion,
-            gameLoop.player.key
+            "playerAnims"
         ];
         gameLoop.player.sprite = game.add.sprite(...playerStartData);
+
+
+        // let deathFrames = [];
+        // for (let i in config.player.animations.death){
+        //     let anime = config.player.animations.death[i];
+        //     deathFrames.push(anime[0]);
+        // }
+        // let anim1 = gameLoop.player.sprite.animations.add('deathAnim', deathFrames, 10, true);
+        let deathAnim = gameLoop.player.sprite.animations.add('deathAnim', [0,1,2,3,4,5], 10, true);
+        let anim2 = gameLoop.player.sprite.animations.add('walkAwayAnime', [6,7,8,9], 10, true);
+        let anim3 = gameLoop.player.sprite.animations.add('walkFaceAnime', [10,11,12,13], 10, true);
+        let anim4 = gameLoop.player.sprite.animations.add('playerIdle', [13], 1, true);
+
+
+        // let walkAwayFrames = [];
+        // for (let i in config.player.animations.walkAway){
+        //     let anime = config.player.animations.walkAway[i];
+        //     walkAwayFrames.push(anime[0]);
+        // }
+        // let anim2 = gameLoop.player.sprite.animations.add('walkAwayAnime', walkAwayFrames, 10, true);
+
+        // let walkFacingFrames = [];
+        // for (let i in config.player.animations.walkFacing){
+        //     let anime = config.player.animations.walkFacing[i];
+        //     walkFacingFrames.push(anime[0]);
+        // }
+        // let anim3 = gameLoop.player.sprite.animations.add('walkFacingAnime', walkFacingFrames, 10, true);
+        // console.log("eandebug", anim3);
+
+
+        // gameLoop.player.sprite.animations.add("playerIdle", [gameLoop.player.key], 1, true);
+        gameLoop.player.sprite.animations.play("playerIdle");
+
         playerUtilities.create(gameLoop.player);
         darknessUtilities.create(gameLoop.player);
         particlesUtilities.create(gameLoop.particles, gameLoop.player);
