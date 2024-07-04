@@ -7,13 +7,20 @@ playerUtilities.create = (player) => {
     game.physics.enable(player.sprite, Phaser.Physics.ARCADE);
     player.sprite.enableBody = true;
     player.sprite.body.collideWorldBounds  = true;
+    // player.torch.sprite.enableBody = true;
+    // player.torch.sprite.body.collideWorldBounds = true;
+
     player.sprite.z = -10;
+    player.torch.sprite.z = -10;
+
     const spriteCenter = [0.5, 0.5];
     player.sprite.anchor.setTo(...spriteCenter);
+    player.torch.sprite.anchor.setTo(...spriteCenter);
     player.blurGlow = null;
     playerUtilities.generateBlurGlow(player);
     playerUtilities.player = player;
     game.world.bringToTop(player.sprite);
+    game.world.bringToTop(player.torch.sprite);
 };
 
 playerUtilities.update = (player) => {
@@ -35,15 +42,20 @@ playerUtilities.update = (player) => {
         let name = player.sprite.animations.currentAnim.name;
         if (priorY > currentY && name !== "walkAwayFrames"){
             gameLoop.player.sprite.animations.play("walkAwayFrames");
+            gameLoop.player.torch.sprite.animations.play("walkAwayTorchFrames");
         }
         else if (priorY < currentY && name !== "walkFacingFrames"){
             gameLoop.player.sprite.animations.play("walkFacingFrames");
+            gameLoop.player.torch.sprite.animations.play("walkFacingTorchFrames");
         }
         else if (priorX === currentX && name !== "playerIdle"){
             gameLoop.player.sprite.animations.play("playerIdle");
+            gameLoop.player.torch.sprite.animations.play("playerIdleTorch");
         }
     }
     playerUtilities.updateBlurGlow(player);
+    player.torch.sprite.x = currentX;
+    player.torch.sprite.y = currentY;
 };
 
 playerUtilities.colorCollision = (player, colorObject) => {
@@ -144,5 +156,6 @@ playerUtilities.updateBlurGlow = (player) => {
     blurGlow.sprite.x = blurGlow.parent.sprite.x;
     blurGlow.sprite.y = blurGlow.parent.sprite.y;
     blurGlow.sprite.anchor.setTo(...objectSpawner.graphicCenter);
-    blurGlow.sprite.tint = blurGlow.parent.color
+    blurGlow.sprite.tint = blurGlow.parent.color;
+    player.torch.sprite.tint = blurGlow.parent.color;
 }

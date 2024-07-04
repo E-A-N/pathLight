@@ -75,8 +75,44 @@ gameLoop = {
             true
         ];
         gameLoop.player.sprite.animations.add(...idleAniData);
-
         gameLoop.player.sprite.animations.play("playerIdle");
+
+        gameLoop.player.torch = {};
+        gameLoop.player.torch.sprite = game.add.sprite(...playerStartData);
+        let deathAniTorchData = [
+            "deathTorchFrames",
+            config.player.animations["deathTorchFrames"],
+            5,
+            true
+        ];
+        gameLoop.player.torch.sprite.animations.add(...deathAniTorchData);
+
+        let walkAwayAniTorchData = [
+            "walkAwayTorchFrames",
+            config.player.animations["walkAwayTorchFrames"],
+            5,
+            true
+        ];
+        gameLoop.player.torch.sprite.animations.add(...walkAwayAniTorchData);
+
+
+        let walkFacingAniTorchData = [
+            "walkFacingTorchFrames",
+            config.player.animations["walkFacingTorchFrames"],
+            5,
+            true
+        ];
+        gameLoop.player.torch.sprite.animations.add(...walkFacingAniTorchData);
+
+        let idleAniTorchData = [
+            "playerIdleTorch",
+            [config.player.animations["walkFacingTorchFrames"][0]],
+            1,
+            true
+        ];
+        gameLoop.player.torch.sprite.animations.add(...idleAniTorchData);
+        gameLoop.player.torch.sprite.animations.play("playerIdleTorch");
+
 
         playerUtilities.create(gameLoop.player);
         darknessUtilities.create(gameLoop.player);

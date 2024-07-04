@@ -420,5 +420,5 @@ config.player.animations = {
     walkAwayFrames: [12,13,14,15],
     walkAwayTorchFrames: [16,17,18,19],
     walkFacingFrames: [20, 21,22, 23],
-    walkFackingTorchFraes: [24,25,26,27]
+    walkFacingTorchFrames: [24,25,26,27]
 }
