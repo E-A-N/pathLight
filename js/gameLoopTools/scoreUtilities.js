@@ -6,12 +6,8 @@ scoreUtilities.create = (score) => {
 };
 
 scoreUtilities.setText = (score, newScore) => {
-    if (newScore != null){
-        score.amount++;
-    }
-    else{
-        score.amount = newScore;
-    }
+    score.amount += newScore
+    
     // kill all the children (that sounds... wrong)
     if (score.sprite.children.length > 0){
         score.sprite.removeChildren();

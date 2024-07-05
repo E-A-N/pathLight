@@ -60,7 +60,8 @@ playerUtilities.update = (player) => {
 
 playerUtilities.colorCollision = (player, colorObject) => {
     game.physics.arcade.collide(player.sprite, colorObject.sprite, (spr1, spr2) => {
-        console.log("collision is happening!!");
+        scoreUtilities.setText(gameLoop.score, 5000);
+        colorObject.sprite.onFullyLeftMap();
     });
 }
 

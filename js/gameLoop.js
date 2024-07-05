@@ -138,7 +138,7 @@ gameLoop = {
         particlesUtilities.update(gameLoop.particles, gameLoop.player);
 
         // update score
-        scoreUtilities.setText(gameLoop.score, gameLoop.score.amount + gameLoop.score.bonus);
+        scoreUtilities.setText(gameLoop.score, gameLoop.score.bonus);
 
         if(gameLoop.debugMode){
             //let upScrollCheat   = gameLoop.debug.controls.isDown(Phaser.KeyCode.OPEN_BRACKET);
