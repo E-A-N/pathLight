@@ -1,4 +1,4 @@
-<a href="https://e-a-n.github.io/pathLight-staging/">
+<a href="https://e-a-n.github.io/pathLight/">
     <div align="center">
         <img src="https://raw.githubusercontent.com/E-A-N/pathLight-staging/master/Title_Image_For_Git.png">
     </div>
