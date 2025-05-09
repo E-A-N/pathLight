@@ -12,8 +12,13 @@ menuState = {
         menuState.startButtonDots = data.menuState.startButtonDots || config.menuState.startButtonDots;
         menuState.characterHorns = data.menuState.characterHorns || config.menuState.characterHorns;
         menuState.characterFace = data.menuState.characterFace || config.menuState.characterFace;
-        menuState.characterLeftEye = data.menuState.characterLeftEye || config.menuState.characterLeftEye;
-        menuState.characterRightEye = data.menuState.characterRightEye || config.menuState.characterRightEye;        
+
+        menuState.characterLeftEye = data.menuState.characterLeftEye 
+            || Object.assign({} , config.menuState.characterSingleEye);
+
+        menuState.characterRightEye = data.menuState.characterRightEye
+            || Object.assign({} , config.menuState.characterSingleEye);
+
         menuState.characterHoodie = data.menuState.characterHoodie || config.menuState.characterHoodie;
         menuState.characterBody = data.menuState.characterBody || config.menuState.characterBody;
         menuState.characterArm = data.menuState.characterArm || config.menuState.characterArm;
@@ -28,6 +33,8 @@ menuState = {
 
     create: () => {
         const graphicCenter = [0.5, 0.5];    // [X, Y]
+
+        game.stage.backgroundColor = "#888888"; // eandebug test
 
         let menuTitleData = [
             menuState.width * menuState.title.xRegion,
@@ -111,22 +118,6 @@ menuState = {
         menuState.characterFace.sprite = game.add.image(...characterFaceData);
         menuState.characterFace.sprite.anchor.setTo(...graphicCenter);
 
-        let characterLeftEye = [
-            menuState.width * menuState.characterLeftEye.xRegion,
-            menuState.height * menuState.characterLeftEye.yRegion,
-            menuState.characterLeftEye.key
-        ];
-        menuState.characterLeftEye.sprite = game.add.image(...characterLeftEye);
-        menuState.characterLeftEye.sprite.anchor.setTo(...graphicCenter);
-
-        let characterRightEye = [
-            menuState.width * menuState.characterRightEye.xRegion,
-            menuState.height * menuState.characterRightEye.yRegion,
-            menuState.characterRightEye.key
-        ];
-        menuState.characterRightEye.sprite = game.add.image(...characterRightEye);
-        menuState.characterRightEye.sprite.anchor.setTo(...graphicCenter);
-
         let characterHorns = [
             menuState.width * menuState.characterHorns.xRegion,
             menuState.height * menuState.characterHorns.yRegion,
@@ -134,6 +125,24 @@ menuState = {
         ];
         menuState.characterHorns.sprite = game.add.image(...characterHorns);
         menuState.characterHorns.sprite.anchor.setTo(...graphicCenter);
+
+        let characterLeftEye = [
+            menuState.width * 0.42,
+            menuState.height * menuState.characterLeftEye.yRegion,
+            menuState.characterLeftEye.key
+        ];
+        menuState.characterLeftEye.sprite = game.add.image(...characterLeftEye);
+        menuState.characterLeftEye.sprite.anchor.setTo(...graphicCenter);
+
+        let characterRightEye = [
+            menuState.width * 0.68,
+            menuState.height * menuState.characterRightEye.yRegion,
+            menuState.characterRightEye.key
+        ];
+        menuState.characterRightEye.sprite = game.add.image(...characterRightEye);
+        menuState.characterRightEye.sprite.anchor.setTo(...graphicCenter);
+
+
 
         let characterStaffHeadData = [
             menuState.width * menuState.characterStaffHead.xRegion,
@@ -153,7 +162,7 @@ menuState = {
         menuState.tweenIdleMotionDown(menuState.characterStaffHead.sprite, 5, 100);
         menuState.tweenIdleMotionDown(menuState.characterShaft.sprite, 5, 100);
 
-        menuState.planEyeBlinks(Math.random() * 10000);
+        menuState.planEyeBlinks(Math.random() * 5000);
     },
 
     tweenStartButtonToTransparent: function () {
@@ -164,7 +173,6 @@ menuState = {
         menuState.startButton.tweenToOpaque = game.add.tween(menuState.startButton.button).to(...menuState.startButtonTweenToOpaqueData);
         menuState.startButton.tweenToOpaque.onComplete.add(menuState.tweenStartButtonToTransparent);    // begin tweening to transparent after finished tweening to opaque
     },
-
 
     tweenIdleMotionDown: function (sprite, customYOffset = 0, delay = 0) {
         let tweenData = [

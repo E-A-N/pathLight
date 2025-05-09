@@ -148,6 +148,12 @@ const config = {
             key: "characterRightEye",
             src: "assets/img/title-rig/8-right-eye.png"
         },
+        characterSingleEye: {
+            xRegion: 0.5,
+            yRegion: 0.935,
+            key: "characterSingleEye",
+            src: "assets/img/title-rig/9-single-eye.png"
+        },
         idleAnimation: {
             yOffset: 5
         }
