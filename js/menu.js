@@ -126,13 +126,14 @@ menuState = {
         menuState.characterStaffHead.sprite = game.add.image(...characterStaffHeadData);
         menuState.characterStaffHead.sprite.anchor.setTo(...graphicCenter);
 
-        menuState.tweenIdleMotionDown(menuState.characterHorns.sprite);
-        menuState.tweenIdleMotionDown(menuState.characterFace.sprite);
-        menuState.tweenIdleMotionDown(menuState.characterHoodie.sprite);
+
+        menuState.tweenIdleMotionDown(menuState.characterHorns.sprite, 3);
+        menuState.tweenIdleMotionDown(menuState.characterFace.sprite, 3);
+        menuState.tweenIdleMotionDown(menuState.characterHoodie.sprite, 0, 200);
         // menuState.tweenIdleMotionDown(menuState.characterBody.sprite);
-        menuState.tweenIdleMotionDown(menuState.characterArm.sprite);
-        menuState.tweenIdleMotionDown(menuState.characterStaffHead.sprite);
-        menuState.tweenIdleMotionDown(menuState.characterShaft.sprite);
+        menuState.tweenIdleMotionDown(menuState.characterArm.sprite, 5, 100);
+        menuState.tweenIdleMotionDown(menuState.characterStaffHead.sprite, 5, 100);
+        menuState.tweenIdleMotionDown(menuState.characterShaft.sprite, 5, 100);
 
     },
 
@@ -154,31 +155,34 @@ menuState = {
         menuState.background2.tweenToOpaque.onComplete.add(menuState.tweenBackground2ToTransparent);
     },
 
-    tweenIdleMotionDown: function (sprite) {
+    tweenIdleMotionDown: function (sprite, customYOffset = 0, delay = 0) {
         let tweenData = [
-            {y: sprite.position.y + menuState.idleAnimation.yOffset},
+            {y: sprite.position.y + (menuState.idleAnimation.yOffset + customYOffset)},
             1000,
             Phaser.Easing.Quadratic.InOut,
-            true
+            true,
+            delay
         ]
         let tween = game.add.tween(sprite)
             .to(...tweenData);
-        tween.onComplete.add(() => {
-            menuState.tweenIdleMotionUp(sprite);
-        });
+
+        tween.repeat(-1);
+        tween.yoyo(true);
+
     },
 
-    tweenIdleMotionUp: function (sprite) {
+    tweenIdleMotionUp: function (sprite, customYOffset = 0, delay = 0) {
         let tweenData = [
-            {y: sprite.position.y - menuState.idleAnimation.yOffset},
+            {y: sprite.position.y - (menuState.idleAnimation.yOffset + customYOffset)},
             1000,
             Phaser.Easing.Quadratic.InOut,
-            true
+            true,
+            delay
         ]
         let tween = game.add.tween(sprite)
             .to(...tweenData);
         tween.onComplete.add(() => {
-            menuState.tweenIdleMotionDown(sprite);
+            menuState.tweenIdleMotionDown(sprite, customYOffset);
         });
 
     }
