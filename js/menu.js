@@ -17,6 +17,7 @@ menuState = {
         menuState.characterArm = data.menuState.characterArm || config.menuState.characterArm;
         menuState.characterStaffHead = data.menuState.characterStaffHead || config.menuState.characterStaffHead;
         menuState.characterShaft = data.menuState.characterShaft || config.menuState.characterShaft;    
+        menuState.idleAnimation = data.menuState.idleAnimation || config.menuState.idleAnimation;
     },
 
     startGame: function() {
@@ -26,29 +27,6 @@ menuState = {
 
     create: () => {
         const graphicCenter = [0.5, 0.5];    // [X, Y]
-
-        // Instantiate graphics ---------------------------------------
-        let menuBackgroundData = [
-            menuState.width * menuState.background.xRegion,
-            menuState.height * menuState.background.yRegion,
-            menuState.background.key
-        ];
-        menuState.background.sprite = game.add.image(...menuBackgroundData);
-        menuState.background.sprite.anchor.setTo(...graphicCenter);
-        menuState.background.sprite.scale.x =
-            menuState.background.sprite.scale.y =
-            transformUtilities.getScaleValueToEnvelopeRect(menuState.background.sprite.width, menuState.background.sprite.height, menuState.width, menuState.height);
-
-        let menuBackground2Data = [
-            menuState.width * menuState.background2.xRegion,
-            menuState.height * menuState.background2.yRegion,
-            menuState.background2.key
-        ];
-        menuState.background2.sprite = game.add.image(...menuBackground2Data);
-        menuState.background2.sprite.anchor.setTo(...graphicCenter);
-        menuState.background2.sprite.scale.x =
-            menuState.background2.sprite.scale.y =
-            transformUtilities.getScaleValueToEnvelopeRect(menuState.background2.sprite.width, menuState.background2.sprite.height, menuState.width, menuState.height);
 
         let menuTitleData = [
             menuState.width * menuState.title.xRegion,
@@ -90,20 +68,6 @@ menuState = {
             true    // autostart tween, saves a call to tween.start()
         ];
         menuState.tweenStartButtonToTransparent();
-
-        menuState.background2TweenToTransparentData = [
-            menuState.background2.tweenToTransparentProperties,
-            menuState.background2.opacityCycleDurationInSeconds * 1000 / 2,
-            menuState.background2.tweenToTransparentEasing,
-            true    // autostart tween, saves a call to tween.start()
-        ];
-        menuState.background2TweenToOpaqueData = [
-            menuState.background2.tweenToOpaqueProperties,
-            menuState.background2.opacityCycleDurationInSeconds * 1000 / 2,
-            menuState.background2.tweenToOpaqueEasing,
-            true    // autostart tween, saves a call to tween.start()
-        ];
-        menuState.tweenBackground2ToTransparent();
 
 
         let characterBodyData = [
@@ -161,6 +125,15 @@ menuState = {
         ];
         menuState.characterStaffHead.sprite = game.add.image(...characterStaffHeadData);
         menuState.characterStaffHead.sprite.anchor.setTo(...graphicCenter);
+
+        menuState.tweenIdleMotionDown(menuState.characterHorns.sprite);
+        menuState.tweenIdleMotionDown(menuState.characterFace.sprite);
+        menuState.tweenIdleMotionDown(menuState.characterHoodie.sprite);
+        // menuState.tweenIdleMotionDown(menuState.characterBody.sprite);
+        menuState.tweenIdleMotionDown(menuState.characterArm.sprite);
+        menuState.tweenIdleMotionDown(menuState.characterStaffHead.sprite);
+        menuState.tweenIdleMotionDown(menuState.characterShaft.sprite);
+
     },
 
     tweenStartButtonToTransparent: function () {
@@ -179,5 +152,34 @@ menuState = {
     tweenBackground2ToOpaque: function () {
         menuState.background2.tweenToOpaque = game.add.tween(menuState.background2.sprite).to(...menuState.background2TweenToOpaqueData);
         menuState.background2.tweenToOpaque.onComplete.add(menuState.tweenBackground2ToTransparent);
+    },
+
+    tweenIdleMotionDown: function (sprite) {
+        let tweenData = [
+            {y: sprite.position.y + menuState.idleAnimation.yOffset},
+            1000,
+            Phaser.Easing.Quadratic.InOut,
+            true
+        ]
+        let tween = game.add.tween(sprite)
+            .to(...tweenData);
+        tween.onComplete.add(() => {
+            menuState.tweenIdleMotionUp(sprite);
+        });
+    },
+
+    tweenIdleMotionUp: function (sprite) {
+        let tweenData = [
+            {y: sprite.position.y - menuState.idleAnimation.yOffset},
+            1000,
+            Phaser.Easing.Quadratic.InOut,
+            true
+        ]
+        let tween = game.add.tween(sprite)
+            .to(...tweenData);
+        tween.onComplete.add(() => {
+            menuState.tweenIdleMotionDown(sprite);
+        });
+
     }
 };

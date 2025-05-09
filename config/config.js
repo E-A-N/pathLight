@@ -96,46 +96,49 @@ const config = {
         },
         characterHorns: {
             xRegion: 0.5,
-            yRegion: 0.5,
+            yRegion: 0.87,
             key: "menuCharacterHorns",
             src: "assets/img/title-rig/0-horns.png"
         },
         characterFace: {
             xRegion: 0.5,
-            yRegion: 0.5,
+            yRegion: 0.87,
             key: "menuCharacterFace",
             src: "assets/img/title-rig/1-face.png"
         },
         characterHoodie: {
             xRegion: 0.5,
-            yRegion: 0.5,
+            yRegion: 0.87,
             key: "menuCharacterHoodie",
             src: "assets/img/title-rig/2-hoodie.png"
         },
         characterBody: {
             xRegion: 0.5,
-            yRegion: 0.5,
+            yRegion: 0.87,
             key: "menuCharacterBody",
             src: "assets/img/title-rig/3-body.png"
         },
         characterArm: {
             xRegion: 0.5,
-            yRegion: 0.5,
+            yRegion: 0.87,
             key: "menuCharacterArm",
             src: "assets/img/title-rig/4-arm.png"
         },
         characterStaffHead: {
             xRegion: 0.5,
-            yRegion: 0.5,
+            yRegion: 0.87,
             key: "menuCharacterStaffHead",
             src: "assets/img/title-rig/5-staff-head.png"
         },
         characterShaft: {
             xRegion: 0.5,
-            yRegion: 0.5,
+            yRegion: 0.87,
             key: "menuCharacterShaft",
             src: "assets/img/title-rig/6-staff-shaft.png"
         },
+        idleAnimation: {
+            yOffset: 5
+        }
     },
     gameLoop:{
         xStartRegion: 0.5,
