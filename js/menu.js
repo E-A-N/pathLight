@@ -169,7 +169,7 @@ menuState = {
         ];
         menuState.characterStaffHeadParticle.sprite = game.add.image(...characterStaffHeadParticleData);
         menuState.characterStaffHeadParticle.sprite.anchor.setTo(...graphicCenter);
-        menuState.characterStaffHeadParticle.sprite.alpha = 0.25;
+        menuState.characterStaffHeadParticle.sprite.alpha = 0.15;
         menuState.characterStaffHeadParticle.sprite.scale.setTo(2, 2);
 
 
