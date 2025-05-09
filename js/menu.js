@@ -12,6 +12,8 @@ menuState = {
         menuState.startButtonDots = data.menuState.startButtonDots || config.menuState.startButtonDots;
         menuState.characterHorns = data.menuState.characterHorns || config.menuState.characterHorns;
         menuState.characterFace = data.menuState.characterFace || config.menuState.characterFace;
+        menuState.characterLeftEye = data.menuState.characterLeftEye || config.menuState.characterLeftEye;
+        menuState.characterRightEye = data.menuState.characterRightEye || config.menuState.characterRightEye;        
         menuState.characterHoodie = data.menuState.characterHoodie || config.menuState.characterHoodie;
         menuState.characterBody = data.menuState.characterBody || config.menuState.characterBody;
         menuState.characterArm = data.menuState.characterArm || config.menuState.characterArm;
@@ -21,7 +23,6 @@ menuState = {
     },
 
     startGame: function() {
-        //game.state.start("gameLoop", data);   // data is currently undefined
         game.state.start("gameLoop");
     },
 
@@ -110,6 +111,22 @@ menuState = {
         menuState.characterFace.sprite = game.add.image(...characterFaceData);
         menuState.characterFace.sprite.anchor.setTo(...graphicCenter);
 
+        let characterLeftEye = [
+            menuState.width * menuState.characterLeftEye.xRegion,
+            menuState.height * menuState.characterLeftEye.yRegion,
+            menuState.characterLeftEye.key
+        ];
+        menuState.characterLeftEye.sprite = game.add.image(...characterLeftEye);
+        menuState.characterLeftEye.sprite.anchor.setTo(...graphicCenter);
+
+        let characterRightEye = [
+            menuState.width * menuState.characterRightEye.xRegion,
+            menuState.height * menuState.characterRightEye.yRegion,
+            menuState.characterRightEye.key
+        ];
+        menuState.characterRightEye.sprite = game.add.image(...characterRightEye);
+        menuState.characterRightEye.sprite.anchor.setTo(...graphicCenter);
+
         let characterHorns = [
             menuState.width * menuState.characterHorns.xRegion,
             menuState.height * menuState.characterHorns.yRegion,
@@ -129,12 +146,14 @@ menuState = {
 
         menuState.tweenIdleMotionDown(menuState.characterHorns.sprite, 3);
         menuState.tweenIdleMotionDown(menuState.characterFace.sprite, 3);
+        menuState.tweenIdleMotionDown(menuState.characterLeftEye.sprite, 3);
+        menuState.tweenIdleMotionDown(menuState.characterRightEye.sprite, 3);
         menuState.tweenIdleMotionDown(menuState.characterHoodie.sprite, 0, 200);
-        // menuState.tweenIdleMotionDown(menuState.characterBody.sprite);
         menuState.tweenIdleMotionDown(menuState.characterArm.sprite, 5, 100);
         menuState.tweenIdleMotionDown(menuState.characterStaffHead.sprite, 5, 100);
         menuState.tweenIdleMotionDown(menuState.characterShaft.sprite, 5, 100);
 
+        menuState.planEyeBlinks(Math.random() * 10000);
     },
 
     tweenStartButtonToTransparent: function () {
@@ -146,14 +165,6 @@ menuState = {
         menuState.startButton.tweenToOpaque.onComplete.add(menuState.tweenStartButtonToTransparent);    // begin tweening to transparent after finished tweening to opaque
     },
 
-    tweenBackground2ToTransparent: function () {
-        menuState.background2.tweenToTransparent = game.add.tween(menuState.background2.sprite).to(...menuState.background2TweenToTransparentData);
-        menuState.background2.tweenToTransparent.onComplete.add(menuState.tweenBackground2ToOpaque);
-    },
-    tweenBackground2ToOpaque: function () {
-        menuState.background2.tweenToOpaque = game.add.tween(menuState.background2.sprite).to(...menuState.background2TweenToOpaqueData);
-        menuState.background2.tweenToOpaque.onComplete.add(menuState.tweenBackground2ToTransparent);
-    },
 
     tweenIdleMotionDown: function (sprite, customYOffset = 0, delay = 0) {
         let tweenData = [
@@ -168,22 +179,27 @@ menuState = {
 
         tween.repeat(-1);
         tween.yoyo(true);
-
     },
 
-    tweenIdleMotionUp: function (sprite, customYOffset = 0, delay = 0) {
+    tweenEyeBlink: function (sprite) {
         let tweenData = [
-            {y: sprite.position.y - (menuState.idleAnimation.yOffset + customYOffset)},
-            1000,
+            {y: 0.1},
+            100,
             Phaser.Easing.Quadratic.InOut,
-            true,
-            delay
+            true
         ]
-        let tween = game.add.tween(sprite)
+        let tween = game.add.tween(sprite.scale)
             .to(...tweenData);
-        tween.onComplete.add(() => {
-            menuState.tweenIdleMotionDown(sprite, customYOffset);
-        });
+        tween.yoyo(true);
+    },
 
+    planEyeBlinks: function(time) {
+        return setTimeout(() => {
+            menuState.tweenEyeBlink(menuState.characterLeftEye.sprite);
+            menuState.tweenEyeBlink(menuState.characterRightEye.sprite);
+
+            let nextTime = 300 + (Math.random() * 5000);
+            menuState.planEyeBlinks(nextTime);
+        }, time)
     }
 };

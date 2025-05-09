@@ -136,9 +136,22 @@ const config = {
             key: "menuCharacterShaft",
             src: "assets/img/title-rig/6-staff-shaft.png"
         },
+        characterLeftEye: {
+            xRegion: 0.5,
+            yRegion: 0.87,
+            key: "characterLeftEye",
+            src: "assets/img/title-rig/7-left-eye.png"
+        },
+        characterRightEye: {
+            xRegion: 0.5,
+            yRegion: 0.87,
+            key: "characterRightEye",
+            src: "assets/img/title-rig/8-right-eye.png"
+        },
         idleAnimation: {
             yOffset: 5
         }
+
     },
     gameLoop:{
         xStartRegion: 0.5,
