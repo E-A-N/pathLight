@@ -34,8 +34,6 @@ menuState = {
     create: () => {
         const graphicCenter = [0.5, 0.5];    // [X, Y]
 
-        game.stage.backgroundColor = "#888888"; // eandebug test
-
         let menuTitleData = [
             menuState.width * menuState.title.xRegion,
             menuState.height * menuState.title.yRegion,
@@ -151,6 +149,9 @@ menuState = {
         ];
         menuState.characterStaffHead.sprite = game.add.image(...characterStaffHeadData);
         menuState.characterStaffHead.sprite.anchor.setTo(...graphicCenter);
+        // menuState.characterStaffHead.sprite.tint= 0xffff00;
+        // menuState.characterStaffHead.sprite.tint= 16776960;
+
 
 
         menuState.tweenIdleMotionDown(menuState.characterHorns.sprite, 3);
@@ -163,6 +164,7 @@ menuState = {
         menuState.tweenIdleMotionDown(menuState.characterShaft.sprite, 5, 100);
 
         menuState.planEyeBlinks(Math.random() * 5000);
+        menuState.planEyeColorCyle(Math.random() * 5000);
     },
 
     tweenStartButtonToTransparent: function () {
@@ -187,6 +189,45 @@ menuState = {
 
         tween.repeat(-1);
         tween.yoyo(true);
+    },
+
+    colorTween: (sprite, targetColor) => {
+        let tweenObj = {
+            color: sprite.tint
+        }
+
+        let tweenData = [
+            {color: targetColor},
+            2000,
+            Phaser.Easing.Linear.None,
+            true
+        ];
+
+        let tween = game.add.tween(tweenObj)
+            .to(...tweenData);
+
+        tween.onUpdateCallback(function(tween, value) {
+            sprite.tint = tweenObj.color;
+        });
+    },
+
+    planEyeColorCyle: function(time) {
+        return setTimeout(() => {
+            let colorOptions = [
+                0xffffff,
+                0xff0000,
+                0xffff00,
+                0x0000ff
+            ]
+            let choice = Math.floor(Math.random() * colorOptions.length);
+            menuState.colorTween(
+                menuState.characterStaffHead.sprite, 
+                colorOptions[choice]
+            )
+
+            let nextTime = 5000 + (Math.random() * 10000);
+            menuState.planEyeColorCyle(nextTime);
+        }, time)
     },
 
     tweenEyeBlink: function (sprite) {

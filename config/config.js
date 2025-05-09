@@ -150,7 +150,7 @@ const config = {
         },
         characterSingleEye: {
             xRegion: 0.5,
-            yRegion: 0.935,
+            yRegion: 0.93,
             key: "characterSingleEye",
             src: "assets/img/title-rig/9-single-eye.png"
         },
