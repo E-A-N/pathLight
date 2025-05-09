@@ -135,6 +135,13 @@ loadState = {
         game.load.image(config.menuState.startButton.key, config.menuState.startButton.src);
         game.load.image(config.menuState.startButtonDots.key, config.menuState.startButtonDots.src);
         game.load.image(config.menuState.characterHorns.key, config.menuState.characterHorns.src);
+        game.load.image(config.menuState.characterBody.key, config.menuState.characterBody.src);
+        game.load.image(config.menuState.characterFace.key, config.menuState.characterFace.src);
+        game.load.image(config.menuState.characterHoodie.key, config.menuState.characterHoodie.src);
+        game.load.image(config.menuState.characterArm.key, config.menuState.characterArm.src)
+        game.load.image(config.menuState.characterStaffHead.key, config.menuState.characterStaffHead.src);
+        game.load.image(config.menuState.characterShaft.key, config.menuState.characterShaft.src);
+
 
         // Game loop loads
         game.load.image(config.loader.playerImage.key, config.loader.playerImage.src);

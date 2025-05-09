@@ -11,6 +11,12 @@ menuState = {
         menuState.startButton = data.menuState.startButton || config.menuState.startButton;
         menuState.startButtonDots = data.menuState.startButtonDots || config.menuState.startButtonDots;
         menuState.characterHorns = data.menuState.characterHorns || config.menuState.characterHorns;
+        menuState.characterFace = data.menuState.characterFace || config.menuState.characterFace;
+        menuState.characterHoodie = data.menuState.characterHoodie || config.menuState.characterHoodie;
+        menuState.characterBody = data.menuState.characterBody || config.menuState.characterBody;
+        menuState.characterArm = data.menuState.characterArm || config.menuState.characterArm;
+        menuState.characterStaffHead = data.menuState.characterStaffHead || config.menuState.characterStaffHead;
+        menuState.characterShaft = data.menuState.characterShaft || config.menuState.characterShaft;    
     },
 
     startGame: function() {
@@ -100,13 +106,61 @@ menuState = {
         menuState.tweenBackground2ToTransparent();
 
 
-        let characterHornsData = [
+        let characterBodyData = [
+            menuState.width * menuState.characterBody.xRegion,
+            menuState.height * menuState.characterBody.yRegion,
+            menuState.characterBody.key
+        ];
+        menuState.characterBody.sprite = game.add.image(...characterBodyData);
+        menuState.characterBody.sprite.anchor.setTo(...graphicCenter);
+
+        let characterHoodieData = [
+            menuState.width * menuState.characterHoodie.xRegion,
+            menuState.height * menuState.characterHoodie.yRegion,
+            menuState.characterHoodie.key
+        ];
+        menuState.characterHoodie.sprite = game.add.image(...characterHoodieData);
+        menuState.characterHoodie.sprite.anchor.setTo(...graphicCenter);
+
+        let characterShaftData = [
+            menuState.width * menuState.characterShaft.xRegion,
+            menuState.height * menuState.characterShaft.yRegion,
+            menuState.characterShaft.key
+        ];
+        menuState.characterShaft.sprite = game.add.image(...characterShaftData);
+        menuState.characterShaft.sprite.anchor.setTo(...graphicCenter);
+
+        let characterArmData = [
+            menuState.width * menuState.characterArm.xRegion,
+            menuState.height * menuState.characterArm.yRegion,
+            menuState.characterArm.key
+        ];
+        menuState.characterArm.sprite = game.add.image(...characterArmData);
+        menuState.characterArm.sprite.anchor.setTo(...graphicCenter);
+
+        let characterFaceData = [
+            menuState.width * menuState.characterFace.xRegion,
+            menuState.height * menuState.characterFace.yRegion,
+            menuState.characterFace.key
+        ];
+        menuState.characterFace.sprite = game.add.image(...characterFaceData);
+        menuState.characterFace.sprite.anchor.setTo(...graphicCenter);
+
+        let characterHorns = [
             menuState.width * menuState.characterHorns.xRegion,
             menuState.height * menuState.characterHorns.yRegion,
             menuState.characterHorns.key
         ];
-        menuState.background.sprite = game.add.image(...characterHornsData);
-        menuState.background.sprite.anchor.setTo(...graphicCenter);
+        menuState.characterHorns.sprite = game.add.image(...characterHorns);
+        menuState.characterHorns.sprite.anchor.setTo(...graphicCenter);
+
+        let characterStaffHeadData = [
+            menuState.width * menuState.characterStaffHead.xRegion,
+            menuState.height * menuState.characterStaffHead.yRegion,
+            menuState.characterStaffHead.key
+        ];
+        menuState.characterStaffHead.sprite = game.add.image(...characterStaffHeadData);
+        menuState.characterStaffHead.sprite.anchor.setTo(...graphicCenter);
     },
 
     tweenStartButtonToTransparent: function () {
