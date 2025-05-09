@@ -58,7 +58,7 @@ const config = {
             xRegion: 0.5,
             yRegion: 0.5,
             key: "mainMenuBackground",
-            src: "assets/img/mainMenuRed.png"
+            src: "assets/img/floorBG.png"
         },
         background2: {
             xRegion: 0.5,

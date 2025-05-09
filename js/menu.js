@@ -36,6 +36,16 @@ menuState = {
     create: () => {
         const graphicCenter = [0.5, 0.5];    // [X, Y]
 
+        let menuBackgroundData = [
+            menuState.width * menuState.background.xRegion,
+            menuState.height * menuState.background.yRegion,
+            menuState.background.key
+        ];
+        menuState.background.sprite = game.add.sprite(...menuBackgroundData);
+        menuState.background.sprite.anchor.setTo(...graphicCenter);
+        menuState.background.sprite.scale.setTo(3, 3);
+        menuState.background.sprite.tint = 0x444444;
+
         let menuTitleData = [
             menuState.width * menuState.title.xRegion,
             menuState.height * menuState.title.yRegion,
