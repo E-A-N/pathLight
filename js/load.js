@@ -140,6 +140,7 @@ loadState = {
         game.load.image(config.menuState.characterHoodie.key, config.menuState.characterHoodie.src);
         game.load.image(config.menuState.characterArm.key, config.menuState.characterArm.src)
         game.load.image(config.menuState.characterStaffHead.key, config.menuState.characterStaffHead.src);
+        game.load.image(config.menuState.characterStaffHeadParticle.key, config.menuState.characterStaffHeadParticle.src);
         game.load.image(config.menuState.characterLeftEye.key, config.menuState.characterLeftEye.src);
         game.load.image(config.menuState.characterRightEye.key, config.menuState.characterRightEye.src);
         game.load.image(config.menuState.characterSingleEye.key, config.menuState.characterSingleEye.src);

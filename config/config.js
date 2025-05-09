@@ -130,6 +130,12 @@ const config = {
             key: "menuCharacterStaffHead",
             src: "assets/img/title-rig/5-staff-head.png"
         },
+        characterStaffHeadParticle: {
+            xRegion: 0.15,
+            yRegion: 0.82,
+            key: "characterStaffHeadParticle",
+            src: "assets/img/star_09.png"
+        },
         characterShaft: {
             xRegion: 0.5,
             yRegion: 0.87,
@@ -156,7 +162,8 @@ const config = {
         },
         idleAnimation: {
             yOffset: 5
-        }
+        },
+
 
     },
     gameLoop:{

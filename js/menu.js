@@ -23,6 +23,8 @@ menuState = {
         menuState.characterBody = data.menuState.characterBody || config.menuState.characterBody;
         menuState.characterArm = data.menuState.characterArm || config.menuState.characterArm;
         menuState.characterStaffHead = data.menuState.characterStaffHead || config.menuState.characterStaffHead;
+        menuState.characterStaffHeadParticle = data.menuState.characterStaffHeadParticle 
+            || config.menuState.characterStaffHeadParticle;
         menuState.characterShaft = data.menuState.characterShaft || config.menuState.characterShaft;    
         menuState.idleAnimation = data.menuState.idleAnimation || config.menuState.idleAnimation;
     },
@@ -149,9 +151,16 @@ menuState = {
         ];
         menuState.characterStaffHead.sprite = game.add.image(...characterStaffHeadData);
         menuState.characterStaffHead.sprite.anchor.setTo(...graphicCenter);
-        // menuState.characterStaffHead.sprite.tint= 0xffff00;
-        // menuState.characterStaffHead.sprite.tint= 16776960;
 
+        let characterStaffHeadParticleData = [
+            menuState.width * menuState.characterStaffHeadParticle.xRegion,
+            menuState.height * menuState.characterStaffHeadParticle.yRegion,
+            menuState.characterStaffHeadParticle.key
+        ];
+        menuState.characterStaffHeadParticle.sprite = game.add.image(...characterStaffHeadParticleData);
+        menuState.characterStaffHeadParticle.sprite.anchor.setTo(...graphicCenter);
+        menuState.characterStaffHeadParticle.sprite.alpha = 0.25;
+        menuState.characterStaffHeadParticle.sprite.scale.setTo(2, 2);
 
 
         menuState.tweenIdleMotionDown(menuState.characterHorns.sprite, 3);
@@ -161,6 +170,7 @@ menuState = {
         menuState.tweenIdleMotionDown(menuState.characterHoodie.sprite, 0, 200);
         menuState.tweenIdleMotionDown(menuState.characterArm.sprite, 5, 100);
         menuState.tweenIdleMotionDown(menuState.characterStaffHead.sprite, 5, 100);
+        menuState.tweenIdleMotionDown(menuState.characterStaffHeadParticle.sprite, 5, 100);
         menuState.tweenIdleMotionDown(menuState.characterShaft.sprite, 5, 100);
 
         menuState.planEyeBlinks(Math.random() * 5000);
@@ -220,9 +230,15 @@ menuState = {
                 0x0000ff
             ]
             let choice = Math.floor(Math.random() * colorOptions.length);
+            let colorChoice = colorOptions[choice]
             menuState.colorTween(
                 menuState.characterStaffHead.sprite, 
-                colorOptions[choice]
+                colorChoice
+            )
+
+            menuState.colorTween(
+                menuState.characterStaffHeadParticle.sprite, 
+                colorChoice
             )
 
             let nextTime = 5000 + (Math.random() * 10000);
