@@ -58,7 +58,7 @@ const config = {
             xRegion: 0.5,
             yRegion: 0.5,
             key: "mainMenuBackground",
-            src: "assets/img/mainMenuRed.png"
+            src: "assets/img/floorBG.png"
         },
         background2: {
             xRegion: 0.5,
@@ -93,7 +93,78 @@ const config = {
             yRegion: 0.5,
             key: "startButtonDots",
             src: "assets/img/startDotsAsset.png"
-        }
+        },
+        characterHorns: {
+            xRegion: 0.5,
+            yRegion: 0.87,
+            key: "menuCharacterHorns",
+            src: "assets/img/title-rig/0-horns.png"
+        },
+        characterFace: {
+            xRegion: 0.5,
+            yRegion: 0.87,
+            key: "menuCharacterFace",
+            src: "assets/img/title-rig/1-face.png"
+        },
+        characterHoodie: {
+            xRegion: 0.5,
+            yRegion: 0.87,
+            key: "menuCharacterHoodie",
+            src: "assets/img/title-rig/2-hoodie.png"
+        },
+        characterBody: {
+            xRegion: 0.5,
+            yRegion: 0.87,
+            key: "menuCharacterBody",
+            src: "assets/img/title-rig/3-body.png"
+        },
+        characterArm: {
+            xRegion: 0.5,
+            yRegion: 0.87,
+            key: "menuCharacterArm",
+            src: "assets/img/title-rig/4-arm.png"
+        },
+        characterStaffHead: {
+            xRegion: 0.5,
+            yRegion: 0.87,
+            key: "menuCharacterStaffHead",
+            src: "assets/img/title-rig/5-staff-head.png"
+        },
+        characterStaffHeadParticle: {
+            xRegion: 0.15,
+            yRegion: 0.82,
+            key: "characterStaffHeadParticle",
+            src: "assets/img/star_09.png"
+        },
+        characterShaft: {
+            xRegion: 0.5,
+            yRegion: 0.87,
+            key: "menuCharacterShaft",
+            src: "assets/img/title-rig/6-staff-shaft.png"
+        },
+        characterLeftEye: {
+            xRegion: 0.5,
+            yRegion: 0.87,
+            key: "characterLeftEye",
+            src: "assets/img/title-rig/7-left-eye.png"
+        },
+        characterRightEye: {
+            xRegion: 0.5,
+            yRegion: 0.87,
+            key: "characterRightEye",
+            src: "assets/img/title-rig/8-right-eye.png"
+        },
+        characterSingleEye: {
+            xRegion: 0.5,
+            yRegion: 0.93,
+            key: "characterSingleEye",
+            src: "assets/img/title-rig/9-single-eye.png"
+        },
+        idleAnimation: {
+            yOffset: 5
+        },
+
+
     },
     gameLoop:{
         xStartRegion: 0.5,
