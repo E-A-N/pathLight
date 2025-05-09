@@ -93,7 +93,13 @@ const config = {
             yRegion: 0.5,
             key: "startButtonDots",
             src: "assets/img/startDotsAsset.png"
-        }
+        },
+        characterHorns: {
+            xRegion: 0.5,
+            yRegion: 0.5,
+            key: "menuCharacterHorns",
+            src: "assets/img/title-rig/0-horns.png"
+        },
     },
     gameLoop:{
         xStartRegion: 0.5,

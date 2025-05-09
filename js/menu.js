@@ -10,6 +10,7 @@ menuState = {
         menuState.title = data.menuState.title || config.menuState.title;
         menuState.startButton = data.menuState.startButton || config.menuState.startButton;
         menuState.startButtonDots = data.menuState.startButtonDots || config.menuState.startButtonDots;
+        menuState.characterHorns = data.menuState.characterHorns || config.menuState.characterHorns;
     },
 
     startGame: function() {
@@ -97,6 +98,15 @@ menuState = {
             true    // autostart tween, saves a call to tween.start()
         ];
         menuState.tweenBackground2ToTransparent();
+
+
+        let characterHornsData = [
+            menuState.width * menuState.characterHorns.xRegion,
+            menuState.height * menuState.characterHorns.yRegion,
+            menuState.characterHorns.key
+        ];
+        menuState.background.sprite = game.add.image(...characterHornsData);
+        menuState.background.sprite.anchor.setTo(...graphicCenter);
     },
 
     tweenStartButtonToTransparent: function () {

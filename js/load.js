@@ -134,6 +134,7 @@ loadState = {
         game.load.image(config.menuState.title.key, config.menuState.title.src);
         game.load.image(config.menuState.startButton.key, config.menuState.startButton.src);
         game.load.image(config.menuState.startButtonDots.key, config.menuState.startButtonDots.src);
+        game.load.image(config.menuState.characterHorns.key, config.menuState.characterHorns.src);
 
         // Game loop loads
         game.load.image(config.loader.playerImage.key, config.loader.playerImage.src);
