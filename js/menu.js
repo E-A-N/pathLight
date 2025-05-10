@@ -173,15 +173,15 @@ menuState = {
         menuState.characterStaffHeadParticle.sprite.scale.setTo(2, 2);
 
 
-        menuState.tweenIdleMotionDown(menuState.characterHorns.sprite, 3);
-        menuState.tweenIdleMotionDown(menuState.characterFace.sprite, 3);
-        menuState.tweenIdleMotionDown(menuState.characterLeftEye.sprite, 3);
-        menuState.tweenIdleMotionDown(menuState.characterRightEye.sprite, 3);
+        menuState.tweenIdleMotionDown(menuState.characterHorns.sprite, 2);
+        menuState.tweenIdleMotionDown(menuState.characterFace.sprite, 2);
+        menuState.tweenIdleMotionDown(menuState.characterLeftEye.sprite, 2);
+        menuState.tweenIdleMotionDown(menuState.characterRightEye.sprite, 2);
         menuState.tweenIdleMotionDown(menuState.characterHoodie.sprite, 0, 200);
-        menuState.tweenIdleMotionDown(menuState.characterArm.sprite, 5, 100);
-        menuState.tweenIdleMotionDown(menuState.characterStaffHead.sprite, 5, 100);
-        menuState.tweenIdleMotionDown(menuState.characterStaffHeadParticle.sprite, 5, 100);
-        menuState.tweenIdleMotionDown(menuState.characterShaft.sprite, 5, 100);
+        menuState.tweenIdleMotionDown(menuState.characterArm.sprite, 3, 100);
+        menuState.tweenIdleMotionDown(menuState.characterStaffHead.sprite, 3, 100);
+        menuState.tweenIdleMotionDown(menuState.characterStaffHeadParticle.sprite, 3, 100);
+        menuState.tweenIdleMotionDown(menuState.characterShaft.sprite, 3, 100);
 
         menuState.planEyeBlinks(Math.random() * 5000);
         menuState.planEyeColorCyle(Math.random() * 5000);
@@ -199,7 +199,7 @@ menuState = {
     tweenIdleMotionDown: function (sprite, customYOffset = 0, delay = 0) {
         let tweenData = [
             {y: sprite.position.y + (menuState.idleAnimation.yOffset + customYOffset)},
-            1000,
+            2000,
             Phaser.Easing.Quadratic.InOut,
             true,
             delay
