@@ -43,10 +43,11 @@ gameLoop = {
         ];
         gameLoop.player.sprite = game.add.sprite(...playerStartData);
 
+        let frameRate = 32
         let deathAniData = [
             "deathFrames",
             config.player.animations["deathFrames"],
-            5,
+            frameRate,
             true
         ];
         gameLoop.player.sprite.animations.add(...deathAniData);
@@ -54,7 +55,7 @@ gameLoop = {
         let walkAwayAniData = [
             "walkAwayFrames",
             config.player.animations["walkAwayFrames"],
-            5,
+            frameRate,
             true
         ];
         gameLoop.player.sprite.animations.add(...walkAwayAniData);
@@ -63,7 +64,7 @@ gameLoop = {
         let walkFacingAniData = [
             "walkFacingFrames",
             config.player.animations["walkFacingFrames"],
-            5,
+            frameRate,
             true
         ];
         gameLoop.player.sprite.animations.add(...walkFacingAniData);
@@ -71,7 +72,7 @@ gameLoop = {
         let idleAniData = [
             "playerIdle",
             [config.player.animations["walkFacingFrames"][0]],
-            1,
+            frameRate,
             true
         ];
         gameLoop.player.sprite.animations.add(...idleAniData);
